@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-mobile {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("./assets/orion-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.racket-variable {
+    --cross_size: 60px;
+    --cross_gap: 10px;
+    --cross_color: white;
+    --cross_border_radius_ext: 50%;
+    --cross_border_radius_int: 2px;
+    --step_input_size: 30px;
+}
+
+.mat-tab-label-container {
+    background-color: white;
+}
+
+.mat-tab-labels {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+}

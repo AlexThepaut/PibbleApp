@@ -1,0 +1,88 @@
+.container-racket {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.directionnal-cross {
+    display: grid;
+    grid-template-areas: "rec u ." "l s r" "set d plus";
+    grid-template-rows: repeat(3, var(--cross_size));
+    grid-template-columns: repeat(3, var(--cross_size));
+    grid-gap: var(--cross_gap);
+}
+
+.directionnal-cross button {
+    background-color: var(--cross_color);
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    min-width: 0;
+}
+
+.directionnal-cross__up {
+    grid-area: u;
+    border-radius: var(--cross_border_radius_ext) var(--cross_border_radius_ext) var(--cross_border_radius_int) var(--cross_border_radius_int);
+}
+
+.directionnal-cross__left {
+    grid-area: l;
+    border-radius: var(--cross_border_radius_ext) var(--cross_border_radius_int) var(--cross_border_radius_int) var(--cross_border_radius_ext);
+}
+
+.directionnal-cross__stop {
+    grid-area: s;
+    border-radius: var(--cross_border_radius_int) var(--cross_border_radius_int) var(--cross_border_radius_int) var(--cross_border_radius_int);
+}
+
+.directionnal-cross__right {
+    grid-area: r;
+    border-radius: var(--cross_border_radius_int) var(--cross_border_radius_ext) var(--cross_border_radius_ext) var(--cross_border_radius_int);
+}
+
+.directionnal-cross__down {
+    grid-area: d;
+    border-radius: var(--cross_border_radius_int) var(--cross_border_radius_int) var(--cross_border_radius_ext) var(--cross_border_radius_ext);
+}
+
+.tracking-button {
+    margin: auto;
+    grid-area: rec;
+    width: 70% !important;
+    height: 70% !important;
+}
+
+.add-object {
+    margin: auto;
+    grid-area: plus;
+    width: 70% !important;
+    height: 70% !important;
+}
+
+.setup {
+    margin: auto;
+    grid-area: set;
+    width: 70% !important;
+    height: 70% !important;
+}
+
+.speed-selector {
+    width: 100%;
+    color: white;
+    background-color: white;
+}
+
+.coordinate-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.coordinate-card__value {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: 5px;
+    text-align: center;
+}

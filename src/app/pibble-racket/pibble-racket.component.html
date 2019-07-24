@@ -1,0 +1,41 @@
+<div class="container-racket racket-variable">
+    <div class="directionnal-cross">
+      <button mat-raised-button class="directionnal-cross__up">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <button mat-raised-button class="directionnal-cross__left">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-raised-button class="directionnal-cross__stop">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-raised-button class="directionnal-cross__right">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <button mat-raised-button class="directionnal-cross__down">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <button mat-raised-button class="tracking-button">
+        <mat-icon>fiber_manual_record</mat-icon>
+      </button>
+      <button mat-raised-button class="add-object">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-raised-button class="setup">
+        <mat-icon>build</mat-icon>
+      </button>
+    </div>
+  
+    <mat-card>
+      Speed :
+      <mat-slider></mat-slider>
+    </mat-card>
+  
+    <mat-card class="coordinate-card">
+      <b>Position :</b>
+      <div class="coordinate-card__value">
+        <span>R. A. / Dec</span><span>{{ ra }}</span><span>{{ dec }}</span>
+        <span>Alt / Az</span><span>{{ alt }}</span><span>{{ az }}</span>
+      </div>
+    </mat-card>
+  </div>
