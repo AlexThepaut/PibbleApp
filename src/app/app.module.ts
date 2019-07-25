@@ -14,7 +14,10 @@ import {
   MatStepperModule,
   MatButtonToggleModule,
   MatToolbarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -28,6 +31,7 @@ import { PibbleConnectionComponent } from './pibble-connection/pibble-connection
 import { PibbleInfoComponent } from './pibble-info/pibble-info.component';
 import { PibbleAddObjectComponent } from './pibble-add-object/pibble-add-object.component';
 import { PibbleObjectDescriptionComponent } from './pibble-object-description/pibble-object-description.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -59,6 +63,10 @@ import { PibbleObjectDescriptionComponent } from './pibble-object-description/pi
     MatTabsModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],

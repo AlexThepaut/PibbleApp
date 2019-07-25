@@ -1,3 +1,28 @@
-<p>
-  pibble-catalogue works!
-</p>
+<div class="container-catalogue">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="const">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contellation </th>
+        <td mat-cell *matCellDef="let row"> {{row.const}} </td>
+      </ng-container>
+      <ng-container matColumnDef="mag">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Magnitude </th>
+        <td mat-cell *matCellDef="let row"> {{row.mag}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+  
+    <mat-paginator class="paginator-object" [pageSizeOptions]="[7, 14, 30, 100]"></mat-paginator>
+  </div>
+</div>

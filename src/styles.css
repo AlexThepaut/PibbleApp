@@ -25,7 +25,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white;
 }
 
+.mat-tab-header {
+    border: none;
+}
+
 .mat-tab-labels {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr);
+    height: 10vh;
+}
+
+.mat-tab-label {
+    height: 100% !important;
 }
