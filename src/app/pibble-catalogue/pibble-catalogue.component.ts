@@ -6,7 +6,7 @@ export interface StellarObject {
   name: string;
   type: string;
   const: string;
-  mag: string;
+  mag: number;
 }
 
 /**
@@ -44,6 +44,18 @@ export class PibbleCatalogueComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  handleObject(event) {
+    console.log(event);
   }
 }
 /** Builds and returns a new User. */
