@@ -1,9 +1,24 @@
+<!-- <div *ngIf="isDataLoaded" class="container--loader">
+  <mat-spinner></mat-spinner>
+</div> -->
+
 <div class="container-catalogue">
   <div class="mat-elevation-z8">
     <div class="filter">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
       </mat-form-field>
+      <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Filter
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            
+          </mat-expansion-panel>
+        </mat-accordion>
     </div>
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">

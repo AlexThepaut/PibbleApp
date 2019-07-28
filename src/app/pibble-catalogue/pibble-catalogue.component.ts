@@ -21,12 +21,12 @@ export class PibbleCatalogueComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'const', 'mag'];
   dataSource: MatTableDataSource<StellarObject>;
 
-  private isData = false;
+  private isDataLoaded = false;
 
   private objects: Array<StellarObject> = [];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private http: HttpClient) {
     // Assign the data to the data source for the table to render
@@ -38,7 +38,7 @@ export class PibbleCatalogueComponent implements OnInit {
       let i = 0;
       while (data[i] != undefined) {
         this.objects.push(createNewObject(data[i++]));
-        this.isData = true;
+        this.isDataLoaded = true;
 
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

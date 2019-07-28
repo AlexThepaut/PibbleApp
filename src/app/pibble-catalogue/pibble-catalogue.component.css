@@ -28,3 +28,7 @@ mat-form-field {
     padding: 10px 0;
     background-color: white;
 }
+
+.filter {
+    background-color: white;
+}

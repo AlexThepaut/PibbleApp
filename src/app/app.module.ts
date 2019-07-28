@@ -17,7 +17,9 @@ import {
   MatTabsModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule
+  MatSortModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -66,6 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
