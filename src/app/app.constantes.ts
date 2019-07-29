@@ -11,10 +11,13 @@ export const API_PORT = '5000';
 
 /* Catalogue request constant */
 
-export const REQUEST_CATALOGUE_ALL = '/catalogue/all';
-export const REQUEST_CATALOGUE_ONJECT_BYNAME = '/objects/';
+export const REQUEST_CATALOGUE = '/catalogue/';
 
 /* Command request constant */
 
 export const REQUEST_COMMAND_DIRECTION = '/command/direction';
 export const REQUEST_COMMAND_TRACK = '/command/track';
+
+/* Table names */
+
+export const TABLE_DEEPSKY_OBJECTS = 'objects';

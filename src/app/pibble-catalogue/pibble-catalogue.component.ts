@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { CatalogueService } from '../services/catalogue.service';
+import { TABLE_DEEPSKY_OBJECTS } from '../app.constantes';
 
 export interface StellarObject {
   name: string;
@@ -29,7 +30,7 @@ export class PibbleCatalogueComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient, private catalogueService: CatalogueService) {
+  constructor(private http: HttpClient, private catalogueService: CatalogueService, public dialog: MatDialog) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.objects);
   }
@@ -45,6 +46,12 @@ export class PibbleCatalogueComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
     });
+
+    // this.catalogueService.getCatalogueAll(TABLE_DEEPSKY_OBJECTS, ['name', 'type', 'constellation', 'magnitude']).subscribe(
+    //   data => {
+    //     console.log(data);
+    //   }
+    // );
   }
 
   applyFilter(filterValue: string) {
@@ -56,11 +63,24 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   handleObject(event) {
-    this.catalogueService.getCatalogueObjectByName(event).subscribe(
+    this.catalogueService.getCatalogueObjectByName(TABLE_DEEPSKY_OBJECTS, event).subscribe(
       data => {
         console.log(data);
+        this.openDialog(data);
       }
     )
+  }
+
+  openDialog(data: Object): void {
+    const dialogRef = this.dialog.open(PibbleCatalogueComponentDetailsObject, {
+      width: '90vw',
+      height: '90vh',
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 /** Builds and returns a new User. */
@@ -72,4 +92,20 @@ function createNewObject(object: any): StellarObject {
     const: object.CON,
     mag: object.MAG
   };
+}
+
+@Component({
+  selector: 'pibble-catalogue-details-objects.component',
+  templateUrl: './pibble-catalogue-details/pibble-catalogue-details-objects.component.html',
+})
+export class PibbleCatalogueComponentDetailsObject {
+
+  constructor(
+    public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
+    @Inject(MAT_DIALOG_DATA) public data: Object) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

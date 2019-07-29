@@ -19,20 +19,20 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatProgressSpinnerModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialogModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { PibbleCatalogueComponent } from './pibble-catalogue/pibble-catalogue.component';
+import { PibbleCatalogueComponent, PibbleCatalogueComponentDetailsObject } from './pibble-catalogue/pibble-catalogue.component';
 import { PibbleMenuComponent } from './pibble-menu/pibble-menu.component';
 import { PibbleRacketComponent } from './pibble-racket/pibble-racket.component';
 import { PibbleSetupComponent } from './pibble-setup/pibble-setup.component';
 import { PibbleConnectionComponent } from './pibble-connection/pibble-connection.component';
 import { PibbleInfoComponent } from './pibble-info/pibble-info.component';
 import { PibbleAddObjectComponent } from './pibble-add-object/pibble-add-object.component';
-import { PibbleObjectDescriptionComponent } from './pibble-object-description/pibble-object-description.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -46,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
     PibbleConnectionComponent,
     PibbleInfoComponent,
     PibbleAddObjectComponent,
-    PibbleObjectDescriptionComponent
+    PibbleCatalogueComponentDetailsObject,
   ],
   imports: [
     BrowserModule,
@@ -70,10 +70,14 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
+    MatDialogModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    PibbleCatalogueComponentDetailsObject,
+  ],
 })
 export class AppModule { }
