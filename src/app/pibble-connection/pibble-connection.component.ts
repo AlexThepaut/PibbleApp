@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SocketService } from '../services/socket.service';
 import { Router } from '@angular/router';
-import { PATH_RACKET } from '../app.routes.constantes';
+import { PATH_RACKET } from '../app.constantes';
 
 @Component({
   selector: 'app-pibble-connection',

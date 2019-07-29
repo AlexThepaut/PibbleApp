@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { CatalogueService } from '../services/catalogue.service';
 
 export interface StellarObject {
   name: string;
@@ -28,7 +29,7 @@ export class PibbleCatalogueComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private catalogueService: CatalogueService) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.objects);
   }
@@ -55,7 +56,11 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   handleObject(event) {
-    console.log(event);
+    this.catalogueService.getCatalogueObjectByName(event).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
   }
 }
 /** Builds and returns a new User. */

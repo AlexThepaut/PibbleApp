@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { PATH_HOME, PATH_RACKET, PATH_SETUP } from './app.routes.constantes';
+import { PATH_HOME, PATH_RACKET, PATH_SETUP } from './app.constantes';
 import { PibbleMenuComponent } from './pibble-menu/pibble-menu.component';
 import { PibbleSetupComponent } from './pibble-setup/pibble-setup.component';
 import { PibbleConnectionComponent } from './pibble-connection/pibble-connection.component';

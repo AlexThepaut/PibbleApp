@@ -58,6 +58,14 @@ mat-form-field {
     margin-bottom: -10px
 }
 
-mat-expansion-panel-header {
-    height: 35px !important;
+.mat-cell {
+    padding: 0 !important;
+}
+
+.mat-row {
+    height: 40px !important;
+}
+
+.mat-header-cell {
+    padding: 0 !important;
 }
