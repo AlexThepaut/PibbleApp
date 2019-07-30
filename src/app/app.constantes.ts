@@ -1,3 +1,8 @@
+/* App info */
+
+export const VERSION = 'v1.0.0';
+export const CONTRIBUTORS = ['Pensorain', 'Marklinmax'];
+
 /* Path constant */
 
 export const PATH_HOME = '';

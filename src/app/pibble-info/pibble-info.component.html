@@ -1,7 +1,7 @@
 <div class="container-info">
   <mat-card class="info">
     <span>Firmware Version: 1.0.0</span>
-    <span>App Version: 1.0.0</span>
-    <span>Creator : Pendorain, Marklinmax</span>
+    <span>App Version: {{ appVersion }}</span>
+    <span>Creator : <span *ngFor="let contrib of contributors">{{ contrib }} </span></span>
   </mat-card>
 </div>
