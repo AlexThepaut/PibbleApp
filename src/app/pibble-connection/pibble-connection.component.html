@@ -2,16 +2,7 @@
     <div class="container-connect">
         <mat-card>
             <h3>Connexion</h3>
-            <form class="form-connect" (ngSubmit)="handleSubmit()" [formGroup]="connectForm">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="IPV4" formControlName="ipv4">
-                </mat-form-field>
-        
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Port" formControlName="port" type="number">
-                </mat-form-field>
-                <button mat-raised-button type="submit" [disabled]="connectForm.invalid">Login</button>
-            </form>
+            <button mat-raised-button (click)="handleSubmit()">Login</button>
         </mat-card>
     </div>
 </div>
