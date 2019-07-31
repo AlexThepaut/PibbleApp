@@ -10,8 +10,8 @@ export class CatalogueService {
 
   constructor(private http: HttpClient) { }
 
-  public getCatalogueAll(catalogue: String, columns: String[]): Observable<any> {
-    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue + '?columns=[' + columns + ']';
+  public getCatalogueAll(catalogue: String): Observable<any> {
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue;
     console.log(request);
     return this.http.get(request, { headers: {'Content-Type': 'application/json'} });
   }

@@ -36,22 +36,30 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get("../../assets/csvjson.json").subscribe(data => {
-      let i = 0;
-      while (data[i] != undefined) {
-        this.objects.push(createNewObject(data[i++]));
-        this.isDataLoaded = true;
+    // this.http.get("../../assets/csvjson.json").subscribe(data => {
+    //   let i = 0;
+    //   while (data[i] != undefined) {
+    //     this.objects.push(createNewObject(data[i++]));
+    //     this.isDataLoaded = true;
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    });
-
-    // this.catalogueService.getCatalogueAll(TABLE_DEEPSKY_OBJECTS, ['name', 'type', 'constellation', 'magnitude']).subscribe(
-    //   data => {
-    //     console.log(data);
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
     //   }
-    // );
+    // });
+
+    this.catalogueService.getCatalogueAll(TABLE_DEEPSKY_OBJECTS).subscribe(
+      data => {
+        console.log(data);
+        let i = 0;
+        while (data[i] != undefined) {
+          this.objects.push(createNewObject(data[i++]));
+          this.isDataLoaded = true;
+
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }
+      }
+    );
   }
 
   applyFilter(filterValue: string) {
@@ -65,7 +73,6 @@ export class PibbleCatalogueComponent implements OnInit {
   handleObject(event) {
     this.catalogueService.getCatalogueObjectByName(TABLE_DEEPSKY_OBJECTS, event).subscribe(
       data => {
-        console.log(data);
         this.openDialog(data);
       }
     )
@@ -102,7 +109,7 @@ export class PibbleCatalogueComponentDetailsObject {
 
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
-    @Inject(MAT_DIALOG_DATA) public data: Object) {}
+    @Inject(MAT_DIALOG_DATA) public data: Object) { }
 
   onNoClick(): void {
     this.dialogRef.close();
