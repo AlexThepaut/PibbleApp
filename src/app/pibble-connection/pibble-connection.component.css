@@ -1,11 +1,17 @@
 .form-connect {
-    width: 100%;
-    height: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.form-connect h3 {
+    margin: 0;
+}
+
+.form-connect button {
+    margin-top: 0.83em;
 }
 
 .container-connect {

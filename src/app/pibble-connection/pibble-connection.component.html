@@ -1,8 +1,11 @@
 <div class="container-mobile">
     <div class="container-connect">
-        <mat-card>
-            <h3>Connexion</h3>
-            <button mat-raised-button (click)="handleSubmit()">Login</button>
+        <mat-card class="form-connect">
+            <h3>Connection</h3>
+            <h3>to</h3>
+            <h2>Pibble Telescope</h2>
+            <mat-spinner *ngIf="!isConnected"></mat-spinner>
+            <button mat-raised-button  [disabled]="!isConnected" (click)="handleSubmit()">Start</button>
         </mat-card>
     </div>
 </div>

@@ -1,29 +1,76 @@
 <div class="container-mobile">
-  <mat-vertical-stepper linear="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+  <div class="container-setup">
+    <div class="setup__header">
+      <button mat-raised-button class="return-racket" (click)="handleReturn()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1>Callibration</h1>
+    </div>
+    <div class="setup__precision">
+      <h3>Precision</h3>
+      <mat-progress-bar mode="determinate" [value]="precision"></mat-progress-bar>
+    </div>
+    <div class="setup__point">
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <h3>Celestial pole</h3>
       </div>
-    </mat-step>
-  </mat-vertical-stepper>
+      <div>
+        <button mat-icon-button (click)="handleFirstPosition()">
+          <mat-icon>gps_fixed</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Favorite food</mat-label>
+          <mat-select>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-icon-button (click)="handleSecondPosition()">
+          <mat-icon>gps_fixed</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Favorite food</mat-label>
+          <mat-select>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+            <mat-option>Stars 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-icon-button (click)="handleThirdPosition()">
+          <mat-icon>gps_fixed</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="setup__command">
+      <button mat-raised-button>Reset</button>
+      <button mat-raised-button>GO !</button>
+    </div>
+  </div>
 </div>

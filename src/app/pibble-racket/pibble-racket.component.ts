@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PATH_SETUP } from '../app.constantes';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -12,7 +14,7 @@ export class PibbleRacketComponent implements OnInit {
   private alt: string;
   private az: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.ra = '21 10.6';
@@ -21,4 +23,7 @@ export class PibbleRacketComponent implements OnInit {
     this.az = '52,9°';
   }
 
+  handleSetup() {
+    this.router.navigate([PATH_SETUP]);
+  }
 }

@@ -20,7 +20,9 @@ import {
   MatSortModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressBarModule,
+  MatSelectModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -71,6 +73,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatDialogModule,
+    MatProgressBarModule,
+    MatSelectModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
