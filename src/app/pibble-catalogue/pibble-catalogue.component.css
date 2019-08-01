@@ -32,3 +32,37 @@ mat-form-field {
 .filter {
     background-color: white;
 }
+
+.catalogue__selector {
+    width: 100%;
+}
+
+.catalogue__selector--button {
+    width: 33%;
+}
+
+.filter-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.catalogue__magnitude {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px; 
+}
+
+.filter__other {
+    display: flex;
+    justify-content: space-around;
+}
+
+.filter__const {
+    width: 100px;
+}
+
+.filter__type {
+    width: 100px;
+}

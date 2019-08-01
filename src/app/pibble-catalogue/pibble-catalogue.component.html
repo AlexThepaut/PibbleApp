@@ -9,16 +9,62 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
       </mat-form-field>
       <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Filter
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-        
-            
-          </mat-expansion-panel>
-        </mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Filter
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-button-toggle-group name="catalogueSelect" class="catalogue__selector">
+            <mat-button-toggle class="catalogue__selector--button" value="objects"><img src="../../assets/galaxy-icon.png"
+                class="filter-icon"></mat-button-toggle>
+            <mat-button-toggle class="catalogue__selector--button" value="stars"><img src="../../assets/star-icon.png"
+                class="filter-icon"></mat-button-toggle>
+            <mat-button-toggle class="catalogue__selector--button" value="exoplanets"><img src="../../assets/planet-icon.png"
+                class="filter-icon"></mat-button-toggle>
+          </mat-button-toggle-group>
+          <div class="catalogue__magnitude">
+            <span>Magnitude : </span>
+            <mat-slider thumbLabel="true" max="30" min="-100"></mat-slider>
+          </div>
+          <div class="filter__other">
+              <mat-form-field class="filter__const">
+                  <mat-label>Constellation</mat-label>
+                  <mat-select>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                    <mat-option>Stars 1</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="filter__type">
+                    <mat-label>Type</mat-label>
+                    <mat-select>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                      <mat-option>Stars 1</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
