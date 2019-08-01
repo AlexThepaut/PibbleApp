@@ -75,6 +75,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatButtonToggleModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],

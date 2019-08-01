@@ -22,7 +22,7 @@
       <div>
         <mat-form-field>
           <mat-label>Favorite food</mat-label>
-          <mat-select>
+          <mat-select [disabled]="!isFirstDone">
             <mat-option>Stars 1</mat-option>
             <mat-option>Stars 1</mat-option>
             <mat-option>Stars 1</mat-option>
@@ -39,14 +39,14 @@
         </mat-form-field>
       </div>
       <div>
-        <button mat-icon-button (click)="handleSecondPosition()">
+        <button mat-icon-button (click)="handleSecondPosition()" [disabled]="!isFirstDone">
           <mat-icon>gps_fixed</mat-icon>
         </button>
       </div>
       <div>
         <mat-form-field>
           <mat-label>Favorite food</mat-label>
-          <mat-select>
+          <mat-select [disabled]="!isSecondDone">
             <mat-option>Stars 1</mat-option>
             <mat-option>Stars 1</mat-option>
             <mat-option>Stars 1</mat-option>
@@ -63,14 +63,14 @@
         </mat-form-field>
       </div>
       <div>
-        <button mat-icon-button (click)="handleThirdPosition()">
+        <button mat-icon-button (click)="handleThirdPosition()" [disabled]="!isSecondDone">
           <mat-icon>gps_fixed</mat-icon>
         </button>
       </div>
     </div>
     <div class="setup__command">
-      <button mat-raised-button>Reset</button>
-      <button mat-raised-button>GO !</button>
+      <button mat-raised-button (click)="handleReset()">Reset</button>
+      <button mat-raised-button [disabled]="!isThirdDone" (click)="handleDone()">GO !</button>
     </div>
   </div>
 </div>
