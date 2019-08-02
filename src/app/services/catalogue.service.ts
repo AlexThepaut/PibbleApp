@@ -17,7 +17,7 @@ export class CatalogueService {
   }
 
   public getCatalogueObjectByName(catalogue: String, name: String): Observable<any> {
-    let request = API_ADDRESS + API_PORT /*+ REQUEST_CATALOGUE*/ + '/' + catalogue + '/' + name;
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue + '/' + name;
     console.log(request);
     return this.http.get(request, { headers: {'Content-Type': 'application/json'} });
   }

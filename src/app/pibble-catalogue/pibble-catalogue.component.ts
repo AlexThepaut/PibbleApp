@@ -27,6 +27,10 @@ export class PibbleCatalogueComponent implements OnInit {
 
   private objects: Array<StellarObject> = [];
 
+  private filterConstellations = ["AND", "COU", "ZET"];
+  private filterTypes = ["GAL", "2STARS", "BH"];
+  private isFilterType = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -36,18 +40,18 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.http.get("../../assets/csvjson.json").subscribe(data => {
-    //   let i = 0;
-    //   while (data[i] != undefined) {
-    //     this.objects.push(createNewObject(data[i++]));
-    //     this.isDataLoaded = true;
+    this.http.get("../../assets/csvjson.json").subscribe(data => {
+      let i = 0;
+      while (data[i] != undefined) {
+        this.objects.push(createNewObject(data[i++]));
+        this.isDataLoaded = true;
 
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    //   }
-    // });
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    });
 
-    this.catalogueService.getCatalogueAll(TABLE_DEEPSKY_OBJECTS).subscribe(
+    /*this.catalogueService.getCatalogueAll(TABLE_DEEPSKY_OBJECTS).subscribe(
       data => {
         console.log(data);
         let i = 0;
@@ -59,7 +63,7 @@ export class PibbleCatalogueComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }
       }
-    );
+    );*/
   }
 
   applySearch(filterValue: string) {
@@ -68,6 +72,10 @@ export class PibbleCatalogueComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  filterCatalogueChange(event) {
+    this.isFilterType = event.value === 'objects' ? true : false;
   }
 
   handleObject(event) {

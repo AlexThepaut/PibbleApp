@@ -15,58 +15,39 @@
               Filter
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-button-toggle-group name="catalogueSelect" class="catalogue__selector">
-            <mat-button-toggle class="catalogue__selector--button" value="objects"><img src="../../assets/galaxy-icon.png"
-                class="filter-icon"></mat-button-toggle>
-            <mat-button-toggle class="catalogue__selector--button" value="stars"><img src="../../assets/star-icon.png"
-                class="filter-icon"></mat-button-toggle>
-            <mat-button-toggle class="catalogue__selector--button" value="exoplanets"><img src="../../assets/planet-icon.png"
-                class="filter-icon"></mat-button-toggle>
-          </mat-button-toggle-group>
-          <div class="catalogue__magnitude">
-            <span>Magnitude : </span>
-            <mat-slider thumbLabel="true" max="30" min="-100"></mat-slider>
-          </div>
-          <div class="filter__other">
+          <form>
+            <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)">
+              <mat-button-toggle class="catalogue__selector--button" value="objects"><img
+                  src="../../assets/galaxy-icon.png" class="filter-icon"></mat-button-toggle>
+              <mat-button-toggle class="catalogue__selector--button" value="stars"><img src="../../assets/star-icon.png"
+                  class="filter-icon"></mat-button-toggle>
+              <mat-button-toggle class="catalogue__selector--button" value="exoplanets"><img
+                  src="../../assets/planet-icon.png" class="filter-icon"></mat-button-toggle>
+            </mat-button-toggle-group>
+            <div class="catalogue__magnitude">
+              <span>Magnitude : </span>
+              <mat-slider thumbLabel="true" max="30" min="-100"></mat-slider>
+            </div>
+            <div class="filter__other">
               <mat-form-field class="filter__const">
-                  <mat-label>Constellation</mat-label>
-                  <mat-select>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                    <mat-option>Stars 1</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field class="filter__type">
-                    <mat-label>Type</mat-label>
-                    <mat-select>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                      <mat-option>Stars 1</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-          </div>
-          <div class="filter__button">
+                <mat-label>Constellation</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let const of filterConstellations" [value]="const">{{ const }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="filter__type">
+                <mat-label>Type</mat-label>
+                <mat-select [disabled]="!isFilterType">
+                  <mat-option *ngFor="let type of filterTypes" [value]="type">
+                    {{ type }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="filter__button">
               <button mat-raised-button (click)="handleResetFilter()">Reset</button>
               <button mat-raised-button [disabled]="!isThirdDone" (click)="handleApplyFilter()">Apply</button>
-          </div>
+            </div>
+          </form>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
