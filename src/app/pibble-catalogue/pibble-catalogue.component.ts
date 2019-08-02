@@ -62,7 +62,7 @@ export class PibbleCatalogueComponent implements OnInit {
     );
   }
 
-  applyFilter(filterValue: string) {
+  applySearch(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -88,6 +88,14 @@ export class PibbleCatalogueComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  handleResetFilter() {
+
+  }
+
+  handleApplyFilter() {
+    
   }
 }
 /** Builds and returns a new User. */

@@ -6,7 +6,7 @@
   <div class="mat-elevation-z8">
     <div class="filter">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        <input matInput (keyup)="applySearch($event.target.value)" placeholder="Search">
       </mat-form-field>
       <mat-accordion>
         <mat-expansion-panel>
@@ -62,6 +62,10 @@
                       <mat-option>Stars 1</mat-option>
                     </mat-select>
                   </mat-form-field>
+          </div>
+          <div class="filter__button">
+              <button mat-raised-button (click)="handleResetFilter()">Reset</button>
+              <button mat-raised-button [disabled]="!isThirdDone" (click)="handleApplyFilter()">Apply</button>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

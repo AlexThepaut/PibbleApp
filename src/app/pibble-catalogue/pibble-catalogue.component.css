@@ -66,3 +66,10 @@ mat-form-field {
 .filter__type {
     width: 100px;
 }
+
+.filter__button {
+    margin-top: 10px; 
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
