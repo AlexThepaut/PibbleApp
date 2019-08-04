@@ -1,43 +1,35 @@
-<!-- <div *ngIf="isDataLoaded" class="container--loader">
-  <mat-spinner></mat-spinner>
-</div> -->
-
 <div class="container-catalogue">
   <div class="mat-elevation-z8">
     <div class="filter">
-      <mat-form-field>
+      <mat-form-field class="filter__search">
         <input matInput (keyup)="applySearch($event.target.value)" placeholder="Search">
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-      <mat-accordion>
-        <mat-expansion-panel>
+      <mat-accordion class="filter__menu">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Filter
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <form>
-            <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)">
-              <mat-button-toggle class="catalogue__selector--button" value="objects"><img
-                  src="../../assets/galaxy-icon.png" class="filter-icon"></mat-button-toggle>
-              <mat-button-toggle class="catalogue__selector--button" value="stars"><img src="../../assets/star-icon.png"
-                  class="filter-icon"></mat-button-toggle>
-              <mat-button-toggle class="catalogue__selector--button" value="exoplanets"><img
-                  src="../../assets/planet-icon.png" class="filter-icon"></mat-button-toggle>
+          <form (ngSubmit)="handleSubmitFilter()" [formGroup]="filterForm">
+            <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)" formControlName="catalogue">
+              <mat-button-toggle *ngFor="let cata of filterCatalogue" class="catalogue__selector--button" value="{{ cata }}"><img src="../../assets/{{ cata }}-icon.png" class="filter-icon"></mat-button-toggle>
             </mat-button-toggle-group>
             <div class="catalogue__magnitude">
               <span>Magnitude : </span>
-              <mat-slider thumbLabel="true" max="30" min="-100"></mat-slider>
+              <mat-slider thumbLabel="true" max="30" min="-100" formControlName="magnitude"></mat-slider>
             </div>
             <div class="filter__other">
               <mat-form-field class="filter__const">
-                <mat-label>Constellation</mat-label>
-                <mat-select>
+                <mat-label>Constelation</mat-label>
+                <mat-select formControlName="constelation">
                   <mat-option *ngFor="let const of filterConstellations" [value]="const">{{ const }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="filter__type">
                 <mat-label>Type</mat-label>
-                <mat-select [disabled]="!isFilterType">
+                <mat-select  formControlName="type">
                   <mat-option *ngFor="let type of filterTypes" [value]="type">
                     {{ type }}</mat-option>
                 </mat-select>
@@ -45,7 +37,7 @@
             </div>
             <div class="filter__button">
               <button mat-raised-button (click)="handleResetFilter()">Reset</button>
-              <button mat-raised-button [disabled]="!isThirdDone" (click)="handleApplyFilter()">Apply</button>
+              <button mat-raised-button type="submit"[disabled]="filterForm.invalid">Apply</button>
             </div>
           </form>
         </mat-expansion-panel>
@@ -72,7 +64,9 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="handleObject(row.name)"></tr>
     </table>
-
+    <div *ngIf="isDataLoaded" class="catalogue__loader">
+      <mat-spinner></mat-spinner>
+    </div>
     <mat-paginator class="paginator-object" [pageSizeOptions]="[5, 10, 50, 100]"></mat-paginator>
   </div>
 </div>

@@ -31,6 +31,16 @@ mat-form-field {
 
 .filter {
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.catalogue__loader {
+    padding: 30px 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
 }
 
 .catalogue__selector {
@@ -72,4 +82,16 @@ mat-form-field {
     width: 100%;
     display: flex;
     justify-content: space-around;
+}
+
+.filter__search {
+    width: 80%;
+}
+
+.mat-expansion-panel {
+    box-shadow: none !important;
+}
+
+.filter__menu {
+    width: 100%;
 }
