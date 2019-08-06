@@ -12,9 +12,11 @@
               Filter
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <form (ngSubmit)="handleSubmitFilter()" [formGroup]="filterForm">
-            <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)" formControlName="catalogue">
-              <mat-button-toggle *ngFor="let cata of filterCatalogue" class="catalogue__selector--button" value="{{ cata }}"><img src="../../assets/{{ cata }}-icon.png" class="filter-icon"></mat-button-toggle>
+          <form (ngSubmit)="handleSubmitFilter()" [formGroup]="filterForm" class="filter__form">
+            <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)"
+              formControlName="catalogue">
+              <mat-button-toggle *ngFor="let cata of filterCatalogue" class="catalogue__selector--button"
+                value="{{ cata }}"><img src="../../assets/{{ cata }}-icon.png" class="filter-icon"></mat-button-toggle>
             </mat-button-toggle-group>
             <div class="catalogue__magnitude">
               <span>Magnitude : </span>
@@ -29,17 +31,19 @@
               </mat-form-field>
               <mat-form-field class="filter__type">
                 <mat-label>Type</mat-label>
-                <mat-select  formControlName="type">
+                <mat-select formControlName="type">
                   <mat-option *ngFor="let type of filterTypes" [value]="type">
                     {{ type }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="filter__button">
-              <button mat-raised-button (click)="handleResetFilter()">Reset</button>
-              <button mat-raised-button type="submit"[disabled]="filterForm.invalid">Apply</button>
-            </div>
+            <mat-slide-toggle class="filter__visible" formControlName="visible">
+              Visible objects
+            </mat-slide-toggle>
+            <button mat-raised-button class="filter__button" type="submit"
+              [disabled]="filterForm.invalid">Apply</button>
           </form>
+          <button mat-raised-button (click)="handleResetFilter()" class="filter__button">Reset</button>
         </mat-expansion-panel>
       </mat-accordion>
     </div>

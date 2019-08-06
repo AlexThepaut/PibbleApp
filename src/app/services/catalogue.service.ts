@@ -10,14 +10,15 @@ export class CatalogueService {
 
   constructor(private http: HttpClient) { }
 
-  public getCatalogueAllWithFilter(catalogue: String, magnitude: String, constelation: String, type: String): Observable<any> {
+  public getCatalogueAllWithFilter(catalogue: String, magnitude: String, constelation: String, type: String, visible: String): Observable<any> {
     let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue;
     console.log(request);
 
     const params = new HttpParams()
       .append('magnitude', magnitude.toString())
       .append('constelation', constelation.toString())
-      .append('type', type.toString());
+      .append('type', type.toString())
+      .append('visible', visible.toString());
 
     let req = this.http.get(request, { headers: { 'Content-Type': 'application/json' }, params: params});
     console.log(req);

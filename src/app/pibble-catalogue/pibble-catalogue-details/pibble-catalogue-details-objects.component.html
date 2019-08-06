@@ -1,3 +1,8 @@
-{{ data | json }}
+<div class="setup__header">
+    <button mat-raised-button class="return-arrow" (click)="return()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ data.NAME }}</h2>
+</div>
 
-<button mat-raised-button (click)="onNoClick()">Close</button>
+{{ data | json }}

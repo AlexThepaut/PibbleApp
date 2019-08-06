@@ -33,13 +33,14 @@ export class PibbleCatalogueComponent implements OnInit {
   private filterCatalogue = [TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_DEEPSKY_EXOPLANET];
 
   private typesObjects = [];
-  
+
   private isFilterType = false;
 
   catalogueCtrl: FormControl;
   magnitudeCtrl: FormControl;
   constelationCtrl: FormControl;
   typeCtrl: FormControl;
+  visibleCtrl: FormControl;
   filterForm: FormGroup;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -52,31 +53,30 @@ export class PibbleCatalogueComponent implements OnInit {
     this.catalogueCtrl = fb.control('', [Validators.required]);
     this.magnitudeCtrl = fb.control('');
     this.constelationCtrl = fb.control('');
+    this.visibleCtrl = fb.control('');
     this.typeCtrl = fb.control('');
-    
+
     this.filterForm = fb.group({
       catalogue: this.catalogueCtrl,
       magnitude: this.magnitudeCtrl,
       constelation: this.constelationCtrl,
       type: this.typeCtrl,
+      visible: this.visibleCtrl
     });
 
     this.filterForm.controls['type'].disable();
     this.magnitudeCtrl.setValue(-100);
+    this.visibleCtrl.setValue(true);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   applySearch(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // TODO Search
   }
 
   filterCatalogueChange(event) {
-    if(event.value === 'objects') {
+    if (event.value === 'objects') {
       this.filterForm.controls['type'].enable();
       this.catalogueService.getCatalogueObjectTypes().subscribe(
         data => {
@@ -89,7 +89,7 @@ export class PibbleCatalogueComponent implements OnInit {
     this.catalogueService.getCatalogueConstelations(event.value).subscribe(
       data => {
         this.filterConstellations = data;
-    });
+      });
   }
 
   handleObject(event) {
@@ -113,15 +113,20 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   handleResetFilter() {
-    this.filterForm.reset();
+    this.catalogueCtrl.setValue(null);
+    this.typeCtrl.setValue(true);
+    this.constelationCtrl.setValue(null);
+    this.magnitudeCtrl.setValue(-100);
+    this.visibleCtrl.setValue(true);
   }
 
   handleSubmitFilter() {
+    this.objects.splice(0, this.objects.length);
+
     this.isDataLoaded = true;
     this.step++;
-    this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constelationCtrl.value, this.typeCtrl.value).subscribe(
+    this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constelationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
       data => {
-        console.log(data);
         let i = 0;
         while (data[i] != undefined) {
           this.objects.push(createNewObject(data[i++]));
@@ -157,14 +162,17 @@ function createNewObject(object: any): StellarObject {
 @Component({
   selector: 'pibble-catalogue-details-objects.component',
   templateUrl: './pibble-catalogue-details/pibble-catalogue-details-objects.component.html',
+  styleUrls: ['./pibble-catalogue-details/pibble-catalogue-details-objects.component.css']
 })
 export class PibbleCatalogueComponentDetailsObject {
 
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
-    @Inject(MAT_DIALOG_DATA) public data: Object) { }
+    @Inject(MAT_DIALOG_DATA) public data: Object) {
+      console.log(data);
+     }
 
-  onNoClick(): void {
+  return(): void {
     this.dialogRef.close();
   }
 
