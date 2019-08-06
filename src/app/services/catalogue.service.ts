@@ -15,10 +15,10 @@ export class CatalogueService {
     console.log(request);
 
     const params = new HttpParams()
-      .append('magnitude', magnitude.toString())
-      .append('constelation', constelation.toString())
-      .append('type', type.toString())
-      .append('visible', visible.toString());
+      .append('magnitude', magnitude != null ? magnitude.toString() : '')
+      .append('constelation', constelation != null ? constelation.toString() : '')
+      .append('type', type != null ? type.toString() : '')
+      .append('visible', visible != null ? visible.toString() : '');
 
     let req = this.http.get(request, { headers: { 'Content-Type': 'application/json' }, params: params});
     console.log(req);

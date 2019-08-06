@@ -69,3 +69,7 @@ mat-form-field {
 .mat-header-cell {
     padding: 0 !important;
 }
+
+.mat-dialog-container {
+    padding: 0 !important;
+}
