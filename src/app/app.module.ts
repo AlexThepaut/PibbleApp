@@ -31,11 +31,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { PibbleCatalogueComponent, PibbleCatalogueComponentDetailsObject } from './pibble-catalogue/pibble-catalogue.component';
 import { PibbleMenuComponent } from './pibble-menu/pibble-menu.component';
-import { PibbleRacketComponent } from './pibble-racket/pibble-racket.component';
+import { PibbleRacketComponent, PibbleAddObject } from './pibble-racket/pibble-racket.component';
 import { PibbleSetupComponent } from './pibble-setup/pibble-setup.component';
 import { PibbleConnectionComponent } from './pibble-connection/pibble-connection.component';
 import { PibbleInfoComponent } from './pibble-info/pibble-info.component';
-import { PibbleAddObjectComponent } from './pibble-add-object/pibble-add-object.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -48,8 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     PibbleSetupComponent,
     PibbleConnectionComponent,
     PibbleInfoComponent,
-    PibbleAddObjectComponent,
     PibbleCatalogueComponentDetailsObject,
+    PibbleAddObject,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +84,7 @@ import { HttpClientModule } from '@angular/common/http';
   bootstrap: [AppComponent],
   entryComponents: [
     PibbleCatalogueComponentDetailsObject,
+    PibbleAddObject,
   ],
 })
 export class AppModule { }

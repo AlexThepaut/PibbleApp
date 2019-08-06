@@ -1,0 +1,25 @@
+<form>
+    <h1>Add object</h1>
+    <mat-form-field>
+        <input matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Right Ascencion" [(ngModel)]="ra">
+        <button mat-button *ngIf="ra" matSuffix mat-icon-button (click)="ra=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Declination" [(ngModel)]="dec">
+        <button mat-button *ngIf="dec" matSuffix mat-icon-button (click)="dec=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Put a description"></textarea>
+    </mat-form-field>
+    <div>
+        <button mat-raised-button (click)="return()" class="filter__button">Cancel</button>
+        <button mat-raised-button class="filter__button">Save</button>
+    </div>
+</form>
