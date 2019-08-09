@@ -15,6 +15,9 @@ export class PibbleRacketComponent implements OnInit {
   private alt: string;
   private az: string;
 
+  private toggleIconRealTime = 'play_arrow';
+  private isPositionUpdate = true;
+
   constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -30,6 +33,11 @@ export class PibbleRacketComponent implements OnInit {
 
   handleAdd() {
     this.openDialog({});
+  }
+
+  toggleRealTimePosition() {
+    this.isPositionUpdate = this.toggleIconRealTime === 'play_arrow' ? false : true;
+    this.toggleIconRealTime = this.toggleIconRealTime === 'play_arrow' ? 'pause' : 'play_arrow' ;
   }
 
   openDialog(data: Object): void {
@@ -66,7 +74,6 @@ export class PibbleAddObject {
   return(): void {
     this.dialogRef.close();
   }
-
 }
 
 class Coordinate {

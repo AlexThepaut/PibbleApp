@@ -77,6 +77,8 @@
 .coordinate-card {
     display: flex;
     flex-direction: column;
+    position: relative;
+    padding-top: 5px !important;
 }
 
 .coordinate-card__value {
@@ -85,4 +87,11 @@
     grid-template-rows: repeat(2, auto);
     grid-column-gap: 5px;
     text-align: center;
+}
+
+.coordinate-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }

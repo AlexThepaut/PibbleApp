@@ -65,7 +65,7 @@ export class PibbleCatalogueComponent implements OnInit {
     });
 
     this.filterForm.controls['type'].disable();
-    this.magnitudeCtrl.setValue(-100);
+    this.magnitudeCtrl.setValue(100);
     this.visibleCtrl.setValue(true);
   }
 
@@ -116,7 +116,7 @@ export class PibbleCatalogueComponent implements OnInit {
     this.catalogueCtrl.setValue(null);
     this.typeCtrl.setValue(true);
     this.constelationCtrl.setValue(null);
-    this.magnitudeCtrl.setValue(-100);
+    this.magnitudeCtrl.setValue(100);
     this.visibleCtrl.setValue(true);
   }
 
