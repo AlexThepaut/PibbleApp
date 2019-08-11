@@ -35,11 +35,7 @@ export class PibbleConnectionComponent implements OnInit {
   connection() {
     this.geolocation.getCurrentPosition().subscribe(
       data => {
-        var now = new Date;
-        var utc_timestamp = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
-          now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
-
-        this.connectionService.getConnection(data.coords.latitude, data.coords.longitude, utc_timestamp).subscribe(() => {
+        this.connectionService.getConnection(data.coords.latitude, data.coords.longitude, data.timestamp).subscribe(() => {
           this.isConnected = true;
           this.isRequestBack = true;
         },
