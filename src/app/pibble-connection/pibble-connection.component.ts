@@ -12,26 +12,41 @@ import { ConnectionService } from '../services/connection.service';
 export class PibbleConnectionComponent implements OnInit {
 
   isConnected = false;
+  isRequestBack = false;
+  isError = false;
 
   constructor(private router: Router, private geolocation: GeolocalisationService, private connectionService: ConnectionService) {
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().subscribe(
-      data => {
-        console.log(data);
-        this.connectionService.getConnection(data.coords.latitude, data.coords.longitude, data.timestamp).subscribe(() => {
-          this.isConnected = false;
-        },
-        error => {
-          console.log(error);
-        })
-      }
-    )
+    this.connection();
   }
 
   handleSubmit() {
     this.router.navigate([PATH_SETUP]);
+  }
+
+  handleRetry() {
+    this.isRequestBack = false;
+    this.isError = false;
+    this.connection();
+  }
+
+  connection() {
+    this.geolocation.getCurrentPosition().subscribe(
+      data => {
+        console.log(data);
+        this.connectionService.getConnection(data.coords.latitude, data.coords.longitude, data.timestamp).subscribe(() => {
+          this.isConnected = true;
+          this.isRequestBack = true;
+        },
+        error => {
+          this.isError = true;
+          this.isRequestBack = true;
+          console.log(error);
+        })
+      }
+    );
   }
 
 }
