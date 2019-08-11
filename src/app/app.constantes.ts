@@ -28,6 +28,12 @@ export const REQUEST_COMMAND_STOP = '/command/stop';
 
 /* Setup request constant */
 
+export const REQUEST_SETUP = '/setup';
+export const REQUEST_SETUP_INIT = '/init';
+export const REQUEST_SETUP_POINT = '/point';
+export const REQUEST_SETUP_RESET = '/reset';
+export const REQUEST_SETUP_VALIDATE = '/validate';
+
 /* Other request constant */
 
 export const REQUEST_CONNECTION = '/connection';

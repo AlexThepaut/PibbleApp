@@ -22,19 +22,8 @@
       <div>
         <mat-form-field>
           <mat-label>Second star</mat-label>
-          <mat-select [disabled]="!isFirstDone">
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
+          <mat-select [disabled]="!isFirstDone" (value)="secondStar">
+              <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -46,19 +35,8 @@
       <div>
         <mat-form-field>
           <mat-label>Third star</mat-label>
-          <mat-select [disabled]="!isSecondDone">
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
-            <mat-option>Stars 1</mat-option>
+          <mat-select [disabled]="!isSecondDone" (value)="thirdStar">
+            <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -70,7 +48,7 @@
     </div>
     <div class="setup__command">
       <button mat-raised-button (click)="handleReset()">Reset</button>
-      <button mat-raised-button [disabled]="!isThirdDone" (click)="handleDone()">GO !</button>
+      <button mat-raised-button [disabled]="!isSecondDone" (click)="handleDone()">GO !</button>
     </div>
   </div>
 </div>
