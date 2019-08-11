@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PATH_SETUP } from '../app.constantes';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { RacketService } from '../services/racket.service';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -16,16 +17,24 @@ export class PibbleRacketComponent implements OnInit {
   private alt: string;
   private az: string;
 
+  private realTimePosition;
+
+  private speed: number;
+
   private toggleIconRealTime = 'play_arrow';
   private isPositionUpdate = true;
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService) { }
 
   ngOnInit() {
     this.ra = '21 10.6';
     this.dec = '+33 46';
     this.alt = '90°';
     this.az = '52,9°';
+  }
+
+  handleMove(direction: String) {
+    this.racketService.telescopeMove(direction, this.speed).subscribe(() => {});
   }
 
   handleSetup() {
@@ -39,6 +48,18 @@ export class PibbleRacketComponent implements OnInit {
   toggleRealTimePosition() {
     this.isPositionUpdate = this.toggleIconRealTime === 'play_arrow' ? false : true;
     this.toggleIconRealTime = this.toggleIconRealTime === 'play_arrow' ? 'pause' : 'play_arrow';
+
+    if(this.isPositionUpdate) {
+      clearInterval(this.realTimePosition);
+    } else {
+       this.realTimePosition = setInterval(() => {this.updatePosition()}, 1000);
+    }
+  }
+
+  updatePosition() {
+    this.racketService.telescopePosiion().subscribe(data => {
+      console.log(data);
+    });
   }
 
   openDialog(data: Object): void {

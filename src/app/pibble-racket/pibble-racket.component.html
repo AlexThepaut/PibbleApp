@@ -28,14 +28,14 @@
 
   <mat-card>
     Speed :
-    <mat-slider></mat-slider>
+    <mat-slider (value)="speed"></mat-slider>
   </mat-card>
 
   <mat-card class="coordinate-card">
     <div class="coordinate-card__header">
       <b>Position :</b>
       <div>
-        <button mat-icon-button [disabled]="!isPositionUpdate"><mat-icon>replay</mat-icon></button>
+        <button mat-icon-button [disabled]="!isPositionUpdate" (click)="updatePosition()"><mat-icon>replay</mat-icon></button>
         <button mat-icon-button (click)="toggleRealTimePosition()"><mat-icon>{{toggleIconRealTime}}</mat-icon></button>
       </div>
     </div>

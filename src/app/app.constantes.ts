@@ -16,15 +16,16 @@ export const API_PORT = '5000';
 
 /* Catalogue request constant */
 
-export const REQUEST_CATALOGUE = '/catalog/';
+export const REQUEST_CATALOGUE = '/catalog';
 export const REQUEST_CATALOGUE_OBJECTS_TYPES = '/objects/types';
 export const REQUEST_CATALOGUE_CONSTELATIONS = '/constelations';
 
 /* Command request constant */
 
-export const REQUEST_COMMAND_DIRECTION = '/command/move';
-export const REQUEST_COMMAND_TRACK = '/command/track';
-export const REQUEST_COMMAND_STOP = '/command/stop';
+export const REQUEST_COMMAND = '/command';
+export const REQUEST_COMMAND_DIRECTION = '/move';
+export const REQUEST_COMMAND_TRACK = '/track';
+export const REQUEST_COMMAND_STOP = '/stop';
 
 /* Setup request constant */
 
@@ -37,6 +38,7 @@ export const REQUEST_SETUP_VALIDATE = '/validate';
 /* Other request constant */
 
 export const REQUEST_CONNECTION = '/connection';
+export const REQUEST_POSITION = '/position';
 
 /* Table names */
 

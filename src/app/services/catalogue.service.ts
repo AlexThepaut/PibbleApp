@@ -11,7 +11,7 @@ export class CatalogueService {
   constructor(private http: HttpClient) { }
 
   public getCatalogueAllWithFilter(catalogue: String, magnitude: String, constelation: String, type: String, visible: String): Observable<any> {
-    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue;
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + '/' + catalogue;
     console.log(request);
 
     const params = new HttpParams()
@@ -26,7 +26,7 @@ export class CatalogueService {
   }
 
   public getCatalogueByName(catalogue: String, name: String): Observable<any> {
-    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + catalogue + '/' + name;
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + '/' + catalogue + '/' + name;
     console.log(request);
     return this.http.get(request, { headers: { 'Content-Type': 'application/json' } });
   }
@@ -38,8 +38,14 @@ export class CatalogueService {
   }
 
   public getCatalogueConstelations(catalogue: String): Observable<any> {
-    let request = API_ADDRESS + API_PORT + '/' + catalogue + REQUEST_CATALOGUE_CONSTELATIONS;
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + '/' + catalogue + REQUEST_CATALOGUE_CONSTELATIONS;
     console.log(request);
     return this.http.get(request, { headers: { 'Content-Type': 'application/json' } });
+  }
+
+  public addObjectInCatalogue(object: Object): Observable<any> {
+    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE;
+    console.log(request);
+    return this.http.post(request, object, { headers: { 'Content-Type': 'application/json' } });
   }
 }
