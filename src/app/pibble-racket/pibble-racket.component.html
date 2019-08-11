@@ -1,21 +1,21 @@
 <div class="container-racket racket-variable">
   <div class="directionnal-cross">
-    <button mat-raised-button class="directionnal-cross__up">
+    <button mat-raised-button class="directionnal-cross__up" (click)="handleMove('up')">
       <mat-icon>expand_less</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__left">
+    <button mat-raised-button class="directionnal-cross__left" (click)="handleMove('left')">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__stop">
+    <button mat-raised-button class="directionnal-cross__stop" (click)="handleStop()">
       <mat-icon>cancel</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__right">
+    <button mat-raised-button class="directionnal-cross__right" (click)="handleMove('right')">
       <mat-icon>chevron_right</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__down">
+    <button mat-raised-button class="directionnal-cross__down" (click)="handleMove('down')">
       <mat-icon>expand_more</mat-icon>
     </button>
-    <button mat-raised-button class="tracking-button">
+    <button mat-raised-button class="tracking-button" (click)="handleTrack()">
       <mat-icon>fiber_manual_record</mat-icon>
     </button>
     <button mat-raised-button class="add-object" (click)="handleAdd()">

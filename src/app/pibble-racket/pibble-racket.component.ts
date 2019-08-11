@@ -34,6 +34,7 @@ export class PibbleRacketComponent implements OnInit {
   }
 
   handleMove(direction: String) {
+    console.log(direction);
     this.racketService.telescopeMove(direction, this.speed).subscribe(() => {});
   }
 
