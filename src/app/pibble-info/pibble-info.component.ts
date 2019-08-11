@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CONTRIBUTORS, VERSION } from '../app.constantes';
+import { VERSION } from '../app.constantes';
+import { SetupService } from '../services/setup.service';
 
 @Component({
   selector: 'app-pibble-info',
@@ -8,12 +9,14 @@ import { CONTRIBUTORS, VERSION } from '../app.constantes';
 })
 export class PibbleInfoComponent implements OnInit {
 
-  contributors = CONTRIBUTORS;
   appVersion = VERSION
 
-  constructor() { }
+  constructor(private setupService: SetupService) { }
 
   ngOnInit() {
+    this.setupService.getInfos().subscribe(data => {
+      console.log(data);
+    });
   }
 
 }

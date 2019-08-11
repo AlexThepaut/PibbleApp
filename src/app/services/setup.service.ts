@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API_ADDRESS, API_PORT, REQUEST_SETUP, REQUEST_SETUP_INIT, REQUEST_SETUP_POINT, REQUEST_SETUP_RESET, REQUEST_SETUP_VALIDATE } from '../app.constantes';
+import { API_ADDRESS, API_PORT, REQUEST_SETUP, REQUEST_SETUP_INIT, REQUEST_SETUP_POINT, REQUEST_SETUP_RESET, REQUEST_SETUP_VALIDATE, REQUEST_INFOS } from '../app.constantes';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,11 @@ export class SetupService {
 
   public getValidateSetup(): Observable<any> {
     let req = API_ADDRESS + API_PORT + REQUEST_SETUP + REQUEST_SETUP_VALIDATE;
+    return this.http.get(req, { headers: { 'Content-Type': 'application/json' }});
+  }
+
+  public getInfos(): Observable<any> {
+    let req = API_ADDRESS + API_PORT + REQUEST_INFOS;
     return this.http.get(req, { headers: { 'Content-Type': 'application/json' }});
   }
 }

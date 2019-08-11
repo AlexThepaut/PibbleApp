@@ -1,7 +1,6 @@
 /* App info */
 
 export const VERSION = 'v1.0.0';
-export const CONTRIBUTORS = ['Pensorain', 'Marklinmax'];
 
 /* Path constant */
 
@@ -39,6 +38,7 @@ export const REQUEST_SETUP_VALIDATE = '/validate';
 
 export const REQUEST_CONNECTION = '/connection';
 export const REQUEST_POSITION = '/position';
+export const REQUEST_INFOS = '/informations'
 
 /* Table names */
 
