@@ -1,24 +1,24 @@
-<form>
+<form (ngSubmit)="handleAddObject()" [formGroup]="addObjectForm" class="add__object">
     <h1>Add object</h1>
     <mat-form-field>
-        <input matInput placeholder="Name">
+        <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Right Ascencion" [(ngModel)]="ra">
+        <input matInput placeholder="Right Ascencion" formControlName="ra">
         <button mat-button *ngIf="ra" matSuffix mat-icon-button (click)="ra=''">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Declination" [(ngModel)]="dec">
+        <input matInput placeholder="Declination" formControlName="dec">
         <button mat-button *ngIf="dec" matSuffix mat-icon-button (click)="dec=''">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
-        <textarea matInput placeholder="Put a description"></textarea>
+        <textarea matInput placeholder="Put a description" formControlName="desc"></textarea>
     </mat-form-field>
-    <div>
+    <div class="add__object--buttons">
         <button mat-raised-button (click)="return()" class="filter__button">Cancel</button>
         <button mat-raised-button class="filter__button">Save</button>
     </div>

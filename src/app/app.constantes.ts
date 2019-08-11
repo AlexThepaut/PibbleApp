@@ -24,6 +24,11 @@ export const REQUEST_CATALOGUE_CONSTELATIONS = '/constelations';
 
 export const REQUEST_COMMAND_DIRECTION = '/command/move';
 export const REQUEST_COMMAND_TRACK = '/command/track';
+export const REQUEST_COMMAND_STOP = '/command/stop';
+
+/* Setup request constant */
+
+/* Other request constant */
 
 /* Table names */
 

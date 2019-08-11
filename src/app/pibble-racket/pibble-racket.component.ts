@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { PATH_SETUP } from '../app.constantes';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -37,7 +38,7 @@ export class PibbleRacketComponent implements OnInit {
 
   toggleRealTimePosition() {
     this.isPositionUpdate = this.toggleIconRealTime === 'play_arrow' ? false : true;
-    this.toggleIconRealTime = this.toggleIconRealTime === 'play_arrow' ? 'pause' : 'play_arrow' ;
+    this.toggleIconRealTime = this.toggleIconRealTime === 'play_arrow' ? 'pause' : 'play_arrow';
   }
 
   openDialog(data: Object): void {
@@ -60,15 +61,31 @@ export class PibbleRacketComponent implements OnInit {
 })
 export class PibbleAddObject {
 
-  ra: String;
-  dec: String;
+  nameCtrl: FormControl;
+  raCtrl: FormControl;
+  decCtrl: FormControl;
+  descCtrl: FormControl;
+  addObjectForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<PibbleAddObject>,
-    @Inject(MAT_DIALOG_DATA) public data: Coordinate) {
-    this.dec = data.dec;
-    this.ra = data.ra;
+    @Inject(MAT_DIALOG_DATA) public data: Coordinate,
+    private fb: FormBuilder) {
 
+    this.nameCtrl = fb.control('', [Validators.required]);
+    this.raCtrl = fb.control('', [Validators.required]);
+    this.decCtrl = fb.control('', [Validators.required]);
+    this.descCtrl = fb.control('', [Validators.required]);
+
+    this.addObjectForm = fb.group({
+      name: this.nameCtrl,
+      ra: this.raCtrl,
+      dec: this.decCtrl,
+      desc: this.descCtrl
+    });
+
+    this.decCtrl.setValue(data.dec);
+    this.raCtrl.setValue(data.ra);
   }
 
   return(): void {
@@ -77,5 +94,5 @@ export class PibbleAddObject {
 }
 
 class Coordinate {
-  constructor(public ra: String, public dec: String) {}
+  constructor(public ra: String, public dec: String) { }
 }
