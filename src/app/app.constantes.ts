@@ -30,6 +30,8 @@ export const REQUEST_COMMAND_STOP = '/command/stop';
 
 /* Other request constant */
 
+export const REQUEST_CONNECTION = '/connection';
+
 /* Table names */
 
 export const TABLE_DEEPSKY_OBJECTS = 'objects';
