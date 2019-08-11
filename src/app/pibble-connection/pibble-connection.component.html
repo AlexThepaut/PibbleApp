@@ -5,7 +5,10 @@
             <h3>to</h3>
             <h2>Pibble Telescope</h2>
             <mat-spinner *ngIf="!isRequestBack"></mat-spinner>
-            <span class="error error__message" *ngIf="isError">Connection error</span>
+            <!-- <span class="error error__message">Connection error</span> -->
+            <mat-chip-list class="error">
+                <mat-chip color="warn" *ngIf="isError">Connection failed</mat-chip>
+            </mat-chip-list>
             <button mat-raised-button *ngIf="isError" (click)="handleRetry()" class="error" color="warn">Retry</button>
             <button mat-raised-button  [disabled]="!isConnected" (click)="handleSubmit()">Start</button>
         </mat-card>

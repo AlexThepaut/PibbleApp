@@ -24,6 +24,7 @@ import {
   MatProgressBarModule,
   MatSelectModule,
   MatSlideToggleModule,
+  MatChipsModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -77,6 +78,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
+    MatChipsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
