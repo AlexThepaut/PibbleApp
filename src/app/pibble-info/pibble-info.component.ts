@@ -10,12 +10,15 @@ import { SetupService } from '../services/setup.service';
 export class PibbleInfoComponent implements OnInit {
 
   appVersion = VERSION
+  firmwareVersion = [];
+  contributors = [];
 
   constructor(private setupService: SetupService) { }
 
   ngOnInit() {
     this.setupService.getInfos().subscribe(data => {
-      console.log(data);
+      this.firmwareVersion = data.version;
+      this.contributors = data.contributors;
     });
   }
 

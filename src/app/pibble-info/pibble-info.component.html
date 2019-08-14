@@ -1,7 +1,10 @@
 <div class="container-info">
   <mat-card class="info">
-    <span>Firmware Version: 1.0.0</span>
-    <span>App Version: {{ appVersion }}</span>
-    <span>Creator :</span>
+    <span class="info__version">Firmware Version: {{ firmwareVersion }}</span>
+    <span class="info__version">App Version: {{ appVersion }}</span>
+    <div class="contributors">
+      <span class="contributors__title">Creator :</span>
+      <span class="contributors__name" *ngFor="let contrib of contributors">{{ contrib }}</span>
+    </div>
   </mat-card>
 </div>

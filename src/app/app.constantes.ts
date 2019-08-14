@@ -1,6 +1,6 @@
 /* App info */
 
-export const VERSION = 'v1.0.0';
+export const VERSION = '0.0.1';
 
 /* Path constant */
 

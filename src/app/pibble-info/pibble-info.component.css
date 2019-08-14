@@ -11,6 +11,21 @@
     align-items: center;
 }
 
-.info span {
-    margin: 5px 0;
+.info__version {
+    margin: 10px 0;
+}
+
+.contributors {
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.contributors span {
+    margin: 2px 0;
+}
+
+.contributors__name {
+    margin: 2px 0;
+    grid-column-start: 2;
 }
