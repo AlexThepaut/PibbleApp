@@ -28,7 +28,7 @@
 
   <mat-card>
     Speed :
-    <mat-slider (value)="speed"></mat-slider>
+    <mat-slider [(ngModel)]="speed"></mat-slider>
   </mat-card>
 
   <mat-card class="coordinate-card">
@@ -40,8 +40,8 @@
       </div>
     </div>
     <div class="coordinate-card__value">
-      <span>R. A. / Dec</span><span>{{ ra }}</span><span>{{ dec }}</span>
-      <span>Alt / Az</span><span>{{ alt }}</span><span>{{ az }}</span>
+      <span>R. A. / Dec</span><span>{{ coordonite.ra }}</span><span>{{ coordonite.dec }}</span>
+      <span>Alt / Az</span><span>{{ coordonite.alt }}</span><span>{{ coordonite.az }}</span>
     </div>
   </mat-card>
 </div>

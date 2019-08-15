@@ -4,6 +4,7 @@ import { PATH_SETUP } from '../app.constantes';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RacketService } from '../services/racket.service';
+import { PibbleCoordinate } from '../models/pibble-coordinate.model';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -12,10 +13,7 @@ import { RacketService } from '../services/racket.service';
 })
 export class PibbleRacketComponent implements OnInit {
 
-  private ra: string;
-  private dec: string;
-  private alt: string;
-  private az: string;
+  private coordonite = new PibbleCoordinate();
 
   private realTimePosition;
 
@@ -27,14 +25,13 @@ export class PibbleRacketComponent implements OnInit {
   constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService) { }
 
   ngOnInit() {
-    this.ra = '21 10.6';
-    this.dec = '+33 46';
-    this.alt = '90°';
-    this.az = '52,9°';
+    this.speed = 0;
+    this.updatePosition();
   }
 
   handleMove(direction: String) {
     console.log(direction);
+    console.log(this.speed)
     this.racketService.telescopeMove(direction, this.speed).subscribe(() => {});
   }
 
@@ -44,6 +41,14 @@ export class PibbleRacketComponent implements OnInit {
 
   handleAdd() {
     this.openDialog({});
+  }
+
+  handleTrack() {
+    this.racketService.telescopeTrack().subscribe(() => {});
+  }
+
+  handleStop() {
+    this.racketService.telescopeStop().subscribe(() => {});
   }
 
   toggleRealTimePosition() {
@@ -60,6 +65,10 @@ export class PibbleRacketComponent implements OnInit {
   updatePosition() {
     this.racketService.telescopePosiion().subscribe(data => {
       console.log(data);
+      this.coordonite.ra = data.ra;
+      this.coordonite.dec = data.dec;
+      this.coordonite.alt = data.alt;
+      this.coordonite.az = data.az;
     });
   }
 
@@ -67,7 +76,7 @@ export class PibbleRacketComponent implements OnInit {
     const dialogRef = this.dialog.open(PibbleAddObject, {
       width: '90vw',
       height: '90vh',
-      data: new Coordinate(this.ra, this.dec)
+      data: this.coordonite
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -91,7 +100,7 @@ export class PibbleAddObject {
 
   constructor(
     public dialogRef: MatDialogRef<PibbleAddObject>,
-    @Inject(MAT_DIALOG_DATA) public data: Coordinate,
+    @Inject(MAT_DIALOG_DATA) public data: PibbleCoordinate,
     private fb: FormBuilder) {
 
     this.nameCtrl = fb.control('', [Validators.required]);
@@ -113,8 +122,4 @@ export class PibbleAddObject {
   return(): void {
     this.dialogRef.close();
   }
-}
-
-class Coordinate {
-  constructor(public ra: String, public dec: String) { }
 }
