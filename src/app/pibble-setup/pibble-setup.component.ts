@@ -25,6 +25,7 @@ export class PibbleSetupComponent implements OnInit {
 
   ngOnInit() {
     this.setupService.getInitSetup().subscribe(data => {
+      console.log(data)
       this.starSelect = data;
     });
   }
