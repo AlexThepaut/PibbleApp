@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RacketService } from '../services/racket.service';
 import { PibbleCoordinate } from '../models/pibble-coordinate.model';
+import { SetupService } from '../services/setup.service';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -22,7 +23,7 @@ export class PibbleRacketComponent implements OnInit {
   private toggleIconRealTime = 'play_arrow';
   private isPositionUpdate = true;
 
-  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService) { }
+  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService, private setupService: SetupService) { }
 
   ngOnInit() {
     this.speed = 0;
@@ -44,11 +45,17 @@ export class PibbleRacketComponent implements OnInit {
   }
 
   handleTrack() {
+    console.log('move')
     this.racketService.telescopeTrack().subscribe(() => {});
   }
 
   handleStop() {
+    console.log('stop')
     this.racketService.telescopeStop().subscribe(() => {});
+  }
+
+  handleBreakMotion() {
+
   }
 
   toggleRealTimePosition() {

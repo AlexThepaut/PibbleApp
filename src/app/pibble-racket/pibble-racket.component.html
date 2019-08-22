@@ -1,12 +1,12 @@
 <div class="container-racket racket-variable">
   <div class="directionnal-cross">
-    <button mat-raised-button class="directionnal-cross__up" (click)="handleMove('up')">
+    <button mat-raised-button class="directionnal-cross__up" (mousedown)="handleMove(up)" (mouseup)="handleStop()">
       <mat-icon>expand_less</mat-icon>
     </button>
     <button mat-raised-button class="directionnal-cross__left" (click)="handleMove('left')">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__stop" (click)="handleStop()">
+    <button mat-raised-button class="directionnal-cross__stop" (click)="handleBreakMotion()">
       <mat-icon>cancel</mat-icon>
     </button>
     <button mat-raised-button class="directionnal-cross__right" (click)="handleMove('right')">
@@ -15,7 +15,7 @@
     <button mat-raised-button class="directionnal-cross__down" (click)="handleMove('down')">
       <mat-icon>expand_more</mat-icon>
     </button>
-    <button mat-raised-button class="tracking-button" (click)="handleTrack()">
+    <button mat-raised-button [disabled]="!setupService.actualSetup.isSetUp" class="tracking-button" (click)="handleTrack()">
       <mat-icon>fiber_manual_record</mat-icon>
     </button>
     <button mat-raised-button class="add-object" (click)="handleAdd()">

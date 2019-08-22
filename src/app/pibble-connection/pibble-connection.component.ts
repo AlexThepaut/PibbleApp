@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PATH_SETUP } from '../app.constantes';
+import { PATH_RACKET } from '../app.constantes';
 import { GeolocalisationService } from '../services/geolocalisation.service';
 import { ConnectionService } from '../services/connection.service';
 
@@ -23,7 +23,7 @@ export class PibbleConnectionComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.router.navigate([PATH_SETUP]);
+    this.router.navigate([PATH_RACKET]);
   }
 
   handleRetry() {

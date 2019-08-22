@@ -8,7 +8,7 @@
     </div>
     <div class="setup__precision">
       <h3>Precision</h3>
-      <mat-progress-bar mode="determinate" [value]="precision"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="setupService.actualSetup.precision"></mat-progress-bar>
     </div>
     <div class="setup__point">
       <div>
@@ -22,33 +22,33 @@
       <div>
         <mat-form-field>
           <mat-label>Second star</mat-label>
-          <mat-select [disabled]="!isFirstDone" (value)="secondStar">
+          <mat-select [disabled]="!setupService.actualSetup.isCelestialPoleSet" (value)="setupService.actualSetup.secondStar">
               <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div>
-        <button mat-icon-button (click)="handleSecondPosition()" [disabled]="!isFirstDone">
+        <button mat-icon-button (click)="handleSecondPosition()" [disabled]="!setupService.actualSetup.isCelestialPoleSet">
           <mat-icon>gps_fixed</mat-icon>
         </button>
       </div>
       <div>
         <mat-form-field>
           <mat-label>Third star</mat-label>
-          <mat-select [disabled]="!isSecondDone" (value)="thirdStar">
+          <mat-select [disabled]="!setupService.actualSetup.isSecondStarSet" (value)="setupService.actualSetup.thirdStar.name">
             <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div>
-        <button mat-icon-button (click)="handleThirdPosition()" [disabled]="!isSecondDone">
+        <button mat-icon-button (click)="handleThirdPosition()" [disabled]="!setupService.actualSetup.isSecondStarSet">
           <mat-icon>gps_fixed</mat-icon>
         </button>
       </div>
     </div>
     <div class="setup__command">
       <button mat-raised-button (click)="handleReset()">Reset</button>
-      <button mat-raised-button [disabled]="!isSecondDone" (click)="handleDone()">GO !</button>
+      <button mat-raised-button [disabled]="!setupService.actualSetup.isSecondStarSet" (click)="handleDone()">GO !</button>
     </div>
   </div>
 </div>

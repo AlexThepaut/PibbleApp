@@ -10,15 +10,6 @@ import { SetupService } from '../services/setup.service';
 })
 export class PibbleSetupComponent implements OnInit {
 
-  precision = 0;
-
-  isFirstDone = false;
-  isSecondDone = false;
-  isThirdDone = false;
-
-  secondStar = '';
-  thirdStar = '';
-
   starSelect = [];
 
   constructor(private router: Router, private setupService: SetupService) { }
@@ -26,6 +17,7 @@ export class PibbleSetupComponent implements OnInit {
   ngOnInit() {
     this.setupService.getInitSetup().subscribe(data => {
       console.log(data)
+      this.setupService.actualSetup.isSetUp = false;
       this.starSelect = data;
     });
   }
@@ -35,38 +27,40 @@ export class PibbleSetupComponent implements OnInit {
   }
 
   handleFirstPosition() {
-    this.setupService.getPointSetup(1, null).subscribe(() => {});
-
-    this.precision = 20;
-    this.isFirstDone = true;
+    this.setupService.getPointSetup(1, null).subscribe(() => {
+      this.setupService.actualSetup.precision = 20;
+      this.setupService.actualSetup.isCelestialPoleSet = true;
+    });
   }
 
   handleSecondPosition() {
-    this.setupService.getPointSetup(2, this.secondStar).subscribe(() => {});
-
-    this.precision = 66;
-    this.isSecondDone = true;
+    this.setupService.getPointSetup(2, this.setupService.actualSetup.secondStar.name).subscribe(() => {
+      this.setupService.actualSetup.precision = 66;
+      this.setupService.actualSetup.isSecondStarSet = true;
+    });
   }
 
   handleThirdPosition() {
-    this.setupService.getPointSetup(3, this.secondStar).subscribe(() => {});
-
-    this.precision = 100;
-    this.isThirdDone = true;
+    this.setupService.getPointSetup(3, this.setupService.actualSetup.thirdStar.name).subscribe(() => {
+      this.setupService.actualSetup.precision = 100;
+      this.setupService.actualSetup.isThirdStarSet = true;
+    });
   }
 
   handleDone() {
-    this.setupService.getValidateSetup().subscribe(() => {});
-
-    this.router.navigate([PATH_RACKET]);
+    this.setupService.getValidateSetup().subscribe(() => {
+      this.router.navigate([PATH_RACKET]);
+      this.setupService.actualSetup.isSetUp = true;
+    });
   }
 
   handleReset() {
-    this.setupService.getResetSetup().subscribe(() => {});
-
-    this.precision = 0;
-    this.isFirstDone = false;
-    this.isSecondDone = false;
-    this.isThirdDone = false;
+    this.setupService.getResetSetup().subscribe(() => {
+      this.setupService.actualSetup.isSetUp = false;
+      this.setupService.actualSetup.precision = 0;
+      this.setupService.actualSetup.isCelestialPoleSet = false;
+      this.setupService.actualSetup.isSecondStarSet = false;
+      this.setupService.actualSetup.isThirdStarSet = false;
+    });
   }
 }
