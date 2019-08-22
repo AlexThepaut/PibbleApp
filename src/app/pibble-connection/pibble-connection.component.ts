@@ -45,6 +45,11 @@ export class PibbleConnectionComponent implements OnInit {
             this.isRequestBack = true;
             console.log(error);
           })
+      },
+      err => {
+        this.isError = true;
+        this.isRequestBack = true;
+        console.log(err);
       }
     );
   }
