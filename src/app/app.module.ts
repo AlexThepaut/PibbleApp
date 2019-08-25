@@ -37,7 +37,11 @@ import { PibbleSetupComponent } from './pibble-setup/pibble-setup.component';
 import { PibbleConnectionComponent } from './pibble-connection/pibble-connection.component';
 import { PibbleInfoComponent } from './pibble-info/pibble-info.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PibbleJoystickComponent } from './pibble-joystick/pibble-joystick.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { API_ADDRESS, API_SOCKET_PORT } from './app.constantes';
 
+const config: SocketIoConfig = { url: API_ADDRESS + API_SOCKET_PORT, options: {} };
 
 @NgModule({
   declarations: [
@@ -50,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     PibbleInfoComponent,
     PibbleCatalogueComponentDetailsObject,
     PibbleAddObject,
+    PibbleJoystickComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSlideToggleModule,
     MatChipsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent],

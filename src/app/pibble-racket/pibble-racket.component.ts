@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PATH_SETUP } from '../app.constantes';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
@@ -22,8 +22,10 @@ export class PibbleRacketComponent implements OnInit {
 
   private toggleIconRealTime = 'play_arrow';
   private isPositionUpdate = true;
-
-  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService, private setupService: SetupService) { }
+  
+  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService, private setupService: SetupService) {
+    
+  }
 
   ngOnInit() {
     this.speed = 0;
@@ -32,8 +34,8 @@ export class PibbleRacketComponent implements OnInit {
 
   handleMove(direction: String) {
     console.log(direction);
-    console.log(this.speed)
-    this.racketService.telescopeMove(direction, this.speed).subscribe(() => {});
+    console.log(this.speed);
+    this.racketService.telescopeMove(direction, this.speed).subscribe(() => { });
   }
 
   handleSetup() {
@@ -46,12 +48,12 @@ export class PibbleRacketComponent implements OnInit {
 
   handleTrack() {
     console.log('move')
-    this.racketService.telescopeTrack().subscribe(() => {});
+    this.racketService.telescopeTrack().subscribe(() => { });
   }
 
   handleStop() {
     console.log('stop')
-    this.racketService.telescopeStop().subscribe(() => {});
+    this.racketService.telescopeStop().subscribe(() => { });
   }
 
   handleBreakMotion() {
@@ -62,10 +64,10 @@ export class PibbleRacketComponent implements OnInit {
     this.isPositionUpdate = this.toggleIconRealTime === 'play_arrow' ? false : true;
     this.toggleIconRealTime = this.toggleIconRealTime === 'play_arrow' ? 'pause' : 'play_arrow';
 
-    if(this.isPositionUpdate) {
+    if (this.isPositionUpdate) {
       clearInterval(this.realTimePosition);
     } else {
-       this.realTimePosition = setInterval(() => {this.updatePosition()}, 1000);
+      this.realTimePosition = setInterval(() => { this.updatePosition() }, 1000);
     }
   }
 

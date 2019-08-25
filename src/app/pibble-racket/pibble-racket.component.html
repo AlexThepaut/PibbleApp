@@ -1,21 +1,10 @@
 <div class="container-racket racket-variable">
   <div class="directionnal-cross">
-    <button mat-raised-button class="directionnal-cross__up" (mousedown)="handleMove(up)" (mouseup)="handleStop()">
-      <mat-icon>expand_less</mat-icon>
-    </button>
-    <button mat-raised-button class="directionnal-cross__left" (click)="handleMove('left')">
-      <mat-icon>chevron_left</mat-icon>
-    </button>
-    <button mat-raised-button class="directionnal-cross__stop" (click)="handleBreakMotion()">
+    <button mat-raised-button class="stop" (click)="handleBreakMotion()">
       <mat-icon>cancel</mat-icon>
     </button>
-    <button mat-raised-button class="directionnal-cross__right" (click)="handleMove('right')">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
-    <button mat-raised-button class="directionnal-cross__down" (click)="handleMove('down')">
-      <mat-icon>expand_more</mat-icon>
-    </button>
-    <button mat-raised-button [disabled]="!setupService.actualSetup.isSetUp" class="tracking-button" (click)="handleTrack()">
+    <button mat-raised-button [disabled]="!setupService.actualSetup.isSetUp" class="tracking-button"
+      (click)="handleTrack()">
       <mat-icon>fiber_manual_record</mat-icon>
     </button>
     <button mat-raised-button class="add-object" (click)="handleAdd()">
@@ -24,6 +13,9 @@
     <button mat-raised-button class="setup" (click)="handleSetup()">
       <mat-icon>build</mat-icon>
     </button>
+    <div class="joystick">
+      <app-pibble-joystick></app-pibble-joystick>
+    </div>
   </div>
 
   <mat-card>
@@ -35,8 +27,12 @@
     <div class="coordinate-card__header">
       <b>Position :</b>
       <div>
-        <button mat-icon-button [disabled]="!isPositionUpdate" (click)="updatePosition()"><mat-icon>replay</mat-icon></button>
-        <button mat-icon-button (click)="toggleRealTimePosition()"><mat-icon>{{toggleIconRealTime}}</mat-icon></button>
+        <button mat-icon-button [disabled]="!isPositionUpdate" (click)="updatePosition()">
+          <mat-icon>replay</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleRealTimePosition()">
+          <mat-icon>{{toggleIconRealTime}}</mat-icon>
+        </button>
       </div>
     </div>
     <div class="coordinate-card__value">
