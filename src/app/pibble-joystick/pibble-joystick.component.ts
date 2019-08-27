@@ -4,8 +4,8 @@ import { Socket } from 'ngx-socket-io';
 
 class JoyStickOptions {
       zone: HTMLElement;
-      color: 'grey';
-      mode: "dynamic" | "semi" | "static";
+      color: 'white';
+      mode: 'dynamic' | 'semi' | 'static';
       position: { left: '50%', top: '50%' };
 
       public constructor (element: HTMLElement){
@@ -31,11 +31,14 @@ export class PibbleJoystickComponent implements OnInit {
     let options = new JoyStickOptions(this.nipple.nativeElement);
     this.staticNipple = nipplejs.create(options);
 
-    this.staticNipple.on('start', function (evt, data) {
+    this.staticNipple.on('start', (evt, data) => {
+      console.log('Start');
       this.socket.emit('message', 'start');
-    }).on('move', function (evt, data: JoystickData) {
+    }).on('move', (evt, data: JoystickData) => {
+      console.log('Move');
       this.socket.emit('data', data);
-    }).on('end', function (evt, data) {
+    }).on('end', (evt, data) => {
+      console.log('Stop');
       this.socket.emit('message', 'end');
     });
 

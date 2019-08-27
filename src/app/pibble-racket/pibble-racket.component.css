@@ -8,7 +8,7 @@
 
 .directionnal-cross {
     display: grid;
-    grid-template-areas: "rec . s" ". j ." "set . plus";
+    grid-template-areas: "rec . s" ". j ." "plus . set";
     grid-template-rows: repeat(3, var(--cross_size));
     grid-template-columns: repeat(3, var(--cross_size));
     grid-gap: var(--cross_gap);
@@ -80,5 +80,6 @@
 }
 
 .joystick {
+    position: relative;
     grid-area: j;
 }
