@@ -31,23 +31,23 @@ export class PibbleJoystickComponent implements OnInit {
     let options = new JoyStickOptions(this.nipple.nativeElement);
     this.staticNipple = nipplejs.create(options);
 
-    this.staticNipple.on('start', (evt, data) => {
+    this.staticNipple.on('start', () => {
       console.log('Start');
-      this.socket.emit('message', 'start');
-    }).on('move', (evt, data: JoystickData) => {
-      console.log('Move');
-      this.socket.emit('data', data);
-    }).on('end', (evt, data) => {
+      this.socket.emit('joystickdata', {'phase': 'start', 'angle': null, 'force': null});
+    }).on('move', (evt, data: JoyStickData) => {
+      console.log(data);
+      this.socket.emit('joystickdata', {'phase': 'move', 'angle': data.angle.degree, 'force': data.distance});
+    }).on('end', () => {
       console.log('Stop');
-      this.socket.emit('message', 'end');
+      this.socket.emit('joystickdata', {'phase': 'stop', 'angle': null, 'force': null});
     });
 
   }
 }
 
-interface JoystickData {
+class JoyStickData {
   angle: {
     degree: Number
-  },
+  };
   distance: Number
 };

@@ -88,6 +88,7 @@ export class PibbleCatalogueComponent implements OnInit {
 
     this.catalogueService.getCatalogueConstelations(event.value).subscribe(
       data => {
+        console.log(data);
         this.filterConstellations = data;
       });
   }
