@@ -24,7 +24,7 @@ export class PibbleCatalogueComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'const', 'mag'];
   dataSource: MatTableDataSource<StellarObject>;
 
-  private isDataLoaded = false;
+  private isDataLoaded = true;
 
   private objects: Array<StellarObject> = [];
 
@@ -88,7 +88,6 @@ export class PibbleCatalogueComponent implements OnInit {
 
     this.catalogueService.getCatalogueConstelations(event.value).subscribe(
       data => {
-        console.log(data);
         this.filterConstellations = data;
       });
   }
@@ -124,21 +123,17 @@ export class PibbleCatalogueComponent implements OnInit {
   handleSubmitFilter() {
     this.objects.splice(0, this.objects.length);
 
-    this.isDataLoaded = true;
+    this.isDataLoaded = false;
     this.step++;
     this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constelationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
       data => {
-        let i = 0;
-        while (data[i] != undefined) {
-          this.objects.push(createNewObject(data[i++]));
-          this.isDataLoaded = false;
+        this.isDataLoaded = true;
 
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        }
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       error => {
-        this.isDataLoaded = false;
+        this.isDataLoaded = true;
       }
     );
   }

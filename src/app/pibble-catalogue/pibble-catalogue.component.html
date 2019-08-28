@@ -68,7 +68,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="handleObject(row.name)"></tr>
     </table>
-    <div *ngIf="isDataLoaded" class="catalogue__loader">
+    <div *ngIf="!isDataLoaded" class="catalogue__loader">
       <mat-spinner></mat-spinner>
     </div>
     <mat-paginator class="paginator-object" [pageSizeOptions]="[5, 10, 50, 100]"></mat-paginator>

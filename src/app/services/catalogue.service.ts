@@ -16,7 +16,7 @@ export class CatalogueService {
 
     const params = new HttpParams()
       .append('magnitude', magnitude != null ? magnitude.toString() : '')
-      .append('constelation', constelation != null ? constelation.toString() : '')
+      .append('constellation', constelation != null ? constelation.toString() : '')
       .append('type', type != null ? type.toString() : '')
       .append('visible', visible != null ? visible.toString() : '');
 
@@ -38,7 +38,7 @@ export class CatalogueService {
   }
 
   public getCatalogueConstelations(catalogue: String): Observable<any> {
-    let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE + '/' + catalogue + REQUEST_CATALOGUE_CONSTELATIONS;
+    let request = API_ADDRESS + API_PORT + '/' + catalogue + REQUEST_CATALOGUE_CONSTELATIONS;
     console.log(request);
     return this.http.get(request, { headers: { 'Content-Type': 'application/json' } });
   }

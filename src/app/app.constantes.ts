@@ -12,13 +12,13 @@ export const PATH_SETUP = 'setup';
 
 export const API_ADDRESS = 'http://localhost:';
 export const API_PORT = 5000;
-export const API_SOCKET_PORT = 8002;
+export const API_SOCKET_PORT = 42666;
 
 /* Catalogue request constant */
 
 export const REQUEST_CATALOGUE = '/catalog';
 export const REQUEST_CATALOGUE_OBJECTS_TYPES = '/objects/types';
-export const REQUEST_CATALOGUE_CONSTELATIONS = '/constelations';
+export const REQUEST_CATALOGUE_CONSTELATIONS = '/constellations';
 
 /* Command request constant */
 
