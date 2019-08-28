@@ -2,16 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as nipplejs from 'nipplejs';
 import { Socket } from 'ngx-socket-io';
 
-class JoyStickOptions {
-      zone: HTMLElement;
-      color: 'white';
-      mode: 'dynamic' | 'semi' | 'static';
-      position: { left: '50%', top: '50%' };
-
-      public constructor (element: HTMLElement){
-        this.zone = element;
-        this.mode = 'static';
-      }
+interface JoyStickOptions {
+  zone: HTMLElement,
+  color: string,
+  mode: 'dynamic' | 'semi' | 'static',
+  position: { left: string, top: string },
 }
 
 @Component({
@@ -28,7 +23,13 @@ export class PibbleJoystickComponent implements OnInit {
   constructor(private socket: Socket) { }
 
   ngOnInit() {
-    let options = new JoyStickOptions(this.nipple.nativeElement);
+    let options: JoyStickOptions = {
+      zone: this.nipple.nativeElement,
+      color: 'white',
+      mode: 'static',
+      position: { left: '50%', top: '50%' },
+    };
+    
     this.staticNipple = nipplejs.create(options);
 
     this.staticNipple.on('start', () => {
