@@ -1,8 +1,16 @@
-<div class="setup__header">
-    <button mat-raised-button class="return-arrow" (click)="return()">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h2>{{ data.NAME }}</h2>
-</div>
+<div class="detail__container">
+    <div class="detail__header">
+        <button mat-raised-button class="return-arrow" (click)="return()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h2 class="detail__title">{{ data.name | titlecase }}</h2>
+    </div>
+    <div class="detail__content">
 
-{{ data }}
+    </div>
+    <div class="detail__footer">
+        <button mat-raised-button (click)="handleGoTo()">
+            <mat-icon>my_location</mat-icon> GoTo
+        </button>
+    </div>
+</div>

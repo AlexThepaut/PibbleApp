@@ -1,4 +1,11 @@
-export class DeepSkyObject {
+export interface SkyObjects {
+    name: String;
+    type?: String;
+    constellation?: String;
+    magnitude?: any;
+}
+
+export class DeepSkyObject implements SkyObjects {
     id: Number;
     name: String;
     other: String;
@@ -21,7 +28,7 @@ export class DeepSkyObject {
     notes: String;
 }
 
-export class StarObject {
+export class StarObject implements SkyObjects {
     id: Number;
     name: String;
     hip: Number;
@@ -61,7 +68,7 @@ export class StarObject {
     var_max: Number;
 }
 
-export class UserObject {
+export class UserObject implements SkyObjects {
     id: Number;
     name: String;
     right_ascension: String;
@@ -69,8 +76,12 @@ export class UserObject {
     description: String;
 }
 
-export class SolarSystemObject {
+export class SolarSystemObject implements SkyObjects {
     name: String;
     right_ascension: String;
     declination: String;
+
+    constructor (name: String) {
+        this.name = name;
+    }
 }

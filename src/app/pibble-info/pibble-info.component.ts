@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { VERSION } from '../app.constantes';
+import { VERSION, PATH_HOME } from '../app.constantes';
 import { SetupService } from '../services/setup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pibble-info',
@@ -13,7 +14,7 @@ export class PibbleInfoComponent implements OnInit {
   firmwareVersion = [];
   contributors = [];
 
-  constructor(private setupService: SetupService) { }
+  constructor(private setupService: SetupService, private route: Router) { }
 
   ngOnInit() {
     this.setupService.getInfos().subscribe(data => {
@@ -22,4 +23,8 @@ export class PibbleInfoComponent implements OnInit {
     });
   }
 
+  handleDisconnect() {
+    this.setupService.getResetSetup();
+    this.route.navigate([PATH_HOME]);
+  }
 }

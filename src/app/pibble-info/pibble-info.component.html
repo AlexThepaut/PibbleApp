@@ -6,5 +6,9 @@
       <span class="contributors__title">Creator :</span>
       <span class="contributors__name" *ngFor="let contrib of contributors">{{ contrib }}</span>
     </div>
+    <div class="command-button">
+      <button mat-raised-button (click)="handleDisconnect()"><mat-icon>remove_circle</mat-icon></button>
+      <button mat-raised-button disabled><mat-icon>power_off</mat-icon></button>
+    </div>
   </mat-card>
 </div>

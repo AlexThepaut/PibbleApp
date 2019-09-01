@@ -2,15 +2,10 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { CatalogueService } from '../services/catalogue.service';
-import { TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_DEEPSKY_EXOPLANET } from '../app.constantes';
+import { TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS } from '../app.constantes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
-export interface StellarObject {
-  name: string;
-  type: string;
-  const: string;
-  mag: number;
-}
+import { SkyObjects, SolarSystemObject } from '../models/pibble-object.model';
+import { RacketService } from '../services/racket.service';
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -22,15 +17,15 @@ export interface StellarObject {
 })
 export class PibbleCatalogueComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'const', 'mag'];
-  dataSource: MatTableDataSource<StellarObject>;
+  dataSource: MatTableDataSource<SkyObjects>;
 
   private isDataLoaded = true;
 
-  private objects: Array<StellarObject> = [];
+  private objects: Array<SkyObjects> = [];
 
   private filterConstellations = [];
   private filterTypes = [];
-  private filterCatalogue = [TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_DEEPSKY_EXOPLANET];
+  private filterCatalogue = [TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS];
 
   private typesObjects = [];
 
@@ -38,7 +33,7 @@ export class PibbleCatalogueComponent implements OnInit {
 
   catalogueCtrl: FormControl;
   magnitudeCtrl: FormControl;
-  constelationCtrl: FormControl;
+  constellationCtrl: FormControl;
   typeCtrl: FormControl;
   visibleCtrl: FormControl;
   filterForm: FormGroup;
@@ -52,55 +47,83 @@ export class PibbleCatalogueComponent implements OnInit {
 
     this.catalogueCtrl = fb.control('', [Validators.required]);
     this.magnitudeCtrl = fb.control('');
-    this.constelationCtrl = fb.control('');
+    this.constellationCtrl = fb.control('');
     this.visibleCtrl = fb.control('');
     this.typeCtrl = fb.control('');
 
     this.filterForm = fb.group({
       catalogue: this.catalogueCtrl,
       magnitude: this.magnitudeCtrl,
-      constelation: this.constelationCtrl,
+      constellation: this.constellationCtrl,
       type: this.typeCtrl,
       visible: this.visibleCtrl
     });
 
+    this.filterForm.controls['magnitude'].disable();
     this.filterForm.controls['type'].disable();
+    this.filterForm.controls['visible'].disable();
+    this.filterForm.controls['constellation'].disable();
     this.magnitudeCtrl.setValue(100);
     this.visibleCtrl.setValue(false);
   }
 
   ngOnInit() { }
 
-  applySearch(filterValue: string) {
-    // TODO Search
+  filterCatalogueChange(event) {
+    switch (event.value) {
+      case TABLE_DEEPSKY_STARS:
+        this.filterForm.controls['type'].disable();
+        this.filterForm.controls['magnitude'].enable();
+        this.typeCtrl.setValue('');
+        this.constellationCtrl.setValue('');
+        this.getConstellations(event.value);
+        break;
+      case TABLE_DEEPSKY_OBJECTS:
+        this.filterForm.controls['magnitude'].enable();
+        this.typeCtrl.setValue('');
+        this.constellationCtrl.setValue('');
+        this.getConstellations(event.value);
+        this.getTypes();
+        break;
+      default:
+        this.typeCtrl.setValue('');
+        this.constellationCtrl.setValue('');
+        this.magnitudeCtrl.setValue(100);
+        this.filterForm.controls['magnitude'].disable();
+        this.filterForm.controls['type'].disable();
+        this.filterForm.controls['constellation'].disable();
+        break;
+    }
+    this.filterForm.controls['visible'].enable();
   }
 
-  filterCatalogueChange(event) {
-    if (event.value === 'objects') {
-      this.filterForm.controls['type'].enable();
-      this.catalogueService.getCatalogueObjectTypes().subscribe(
-        data => {
-          this.filterTypes = data;
-        });
-    } else {
-      this.filterForm.controls['type'].disable();
-    }
+  getTypes() {
+    this.filterForm.controls['type'].enable();
+    this.catalogueService.getCatalogueObjectTypes().subscribe(
+      data => {
+        this.filterTypes = data;
+      });
+  }
 
-    this.catalogueService.getCatalogueConstelations(event.value).subscribe(
+  getConstellations(constellation: String) {
+    this.filterForm.controls['constellation'].enable();
+    this.catalogueService.getCatalogueConstelations(constellation).subscribe(
       data => {
         this.filterConstellations = data;
       });
   }
 
   handleObject(event) {
-    this.catalogueService.getCatalogueByName(this.catalogueCtrl.value, event).subscribe(
+    /*this.catalogueService.getCatalogueByName(this.catalogueCtrl.value, event).subscribe(
       data => {
         this.openDialog(data);
       }
-    )
+    )*/
+    
+    this.openDialog(this.objects[this.objects.findIndex(p => p.name.toLowerCase() === event.toLowerCase())]);
   }
 
-  openDialog(data: Object): void {
+  openDialog(data: SkyObjects): void {
     const dialogRef = this.dialog.open(PibbleCatalogueComponentDetailsObject, {
       width: '90vw',
       height: '90vh',
@@ -113,9 +136,14 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   handleResetFilter() {
+    this.filterForm.controls['magnitude'].disable();
+    this.filterForm.controls['type'].disable();
+    this.filterForm.controls['constellation'].disable();
+    this.filterForm.controls['visible'].disable();
     this.catalogueCtrl.setValue(null);
     this.typeCtrl.setValue(true);
-    this.constelationCtrl.setValue(null);
+    this.constellationCtrl.setValue(null);
+    this.typeCtrl.setValue(null);
     this.magnitudeCtrl.setValue(100);
     this.visibleCtrl.setValue(false);
   }
@@ -125,17 +153,37 @@ export class PibbleCatalogueComponent implements OnInit {
 
     this.isDataLoaded = false;
     this.step++;
-    this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constelationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
-      data => {
-        this.isDataLoaded = true;
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      error => {
-        this.isDataLoaded = true;
-      }
-    );
+    if (this.catalogueCtrl.value === TABLE_SOLAR_OBJECTS) {
+      this.catalogueService.getEphemerides().subscribe((data: Array<String>) => {
+        data.forEach((ephemeride) => {
+          if (!ephemeride.includes('earth')) {
+            this.objects.push(new SolarSystemObject(ephemeride));
+          }
+          this.isDataLoaded = true;
+
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+          error => {
+            this.isDataLoaded = true;
+          });
+      })
+    } else {
+      this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
+        data => {
+          console.log(data);
+
+          this.isDataLoaded = true;
+
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error => {
+          this.isDataLoaded = true;
+        }
+      );
+    }
   }
 
   step = 0;
@@ -143,16 +191,6 @@ export class PibbleCatalogueComponent implements OnInit {
   setStep(index: number) {
     this.step = index;
   }
-}
-/** Builds and returns a new User. */
-function createNewObject(object: any): StellarObject {
-
-  return {
-    name: object.NAME,
-    type: object.TYPE,
-    const: object.CONSTELATION,
-    mag: object.MAGNITUDE
-  };
 }
 
 @Component({
@@ -164,9 +202,16 @@ export class PibbleCatalogueComponentDetailsObject {
 
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
-    @Inject(MAT_DIALOG_DATA) public data: Object) {
-      console.log(data);
-     }
+    @Inject(MAT_DIALOG_DATA) public data: SkyObjects, public telescopeService: RacketService) {
+    console.log(data);
+  }
+
+  handleGoTo() {
+    this.return();
+
+    // TODO Finir l'envoie de la requète
+    this.telescopeService.telescopeGoTo('', null);
+  }
 
   return(): void {
     this.dialogRef.close();

@@ -12,13 +12,14 @@ export const PATH_SETUP = 'setup';
 
 export const API_ADDRESS = 'http://localhost:';
 export const API_PORT = 5000;
-export const API_SOCKET_PORT = 42666;
+export const API_SOCKET_PORT = 5000;
 
 /* Catalogue request constant */
 
 export const REQUEST_CATALOGUE = '/catalog';
 export const REQUEST_CATALOGUE_OBJECTS_TYPES = '/objects/types';
 export const REQUEST_CATALOGUE_CONSTELATIONS = '/constellations';
+export const REQUEST_CATALOGUE_EPHEMERIDES = '/ephemerides';
 
 /* Command request constant */
 
@@ -45,4 +46,5 @@ export const REQUEST_INFOS = '/informations'
 
 export const TABLE_DEEPSKY_OBJECTS = 'objects';
 export const TABLE_DEEPSKY_STARS = 'stars';
-export const TABLE_DEEPSKY_EXOPLANET = 'exoplanets';
+export const TABLE_SOLAR_OBJECTS = 'ephemerides';
+export const TABLE_USER_OBJECTS = 'user_point';

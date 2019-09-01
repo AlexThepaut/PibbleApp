@@ -2,7 +2,7 @@
   <div class="mat-elevation-z8">
     <div class="filter">
       <mat-form-field class="filter__search">
-        <input matInput (keyup)="applySearch($event.target.value)" placeholder="Search">
+        <input matInput placeholder="Search">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
       <mat-accordion class="filter__menu">
@@ -25,7 +25,7 @@
             <div class="filter__other">
               <mat-form-field class="filter__const">
                 <mat-label>Constelation</mat-label>
-                <mat-select formControlName="constelation">
+                <mat-select formControlName="constellation">
                   <mat-option *ngFor="let const of filterConstellations" [value]="const">{{ const }}</mat-option>
                 </mat-select>
               </mat-form-field>
@@ -50,7 +50,7 @@
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.name | titlecase}} </td>
       </ng-container>
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>

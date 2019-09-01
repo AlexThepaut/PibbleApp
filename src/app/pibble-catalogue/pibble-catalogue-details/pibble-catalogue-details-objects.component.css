@@ -1,4 +1,20 @@
-.setup__header {
+.detail__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.detail__header {
     display: flex;
     width: 100%;
+}
+
+.detail__title {
+    flex: auto;
+    text-align: center;
+}
+
+.detail__footer {
+    margin: 15px auto;
 }
