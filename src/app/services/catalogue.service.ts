@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_ADDRESS, API_PORT, REQUEST_CATALOGUE, REQUEST_CATALOGUE_OBJECTS_TYPES, REQUEST_CATALOGUE_CONSTELATIONS, REQUEST_CATALOGUE_EPHEMERIDES } from '../app.constantes';
+import { UserObject } from '../models/pibble-object.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class CatalogueService {
     return this.http.get(request, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  public addObjectInCatalogue(object: Object): Observable<any> {
+  public addObjectInCatalogue(object: UserObject): Observable<any> {
     let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE;
     console.log(request);
     return this.http.post(request, object, { headers: { 'Content-Type': 'application/json' } });

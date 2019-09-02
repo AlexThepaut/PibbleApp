@@ -74,6 +74,13 @@ export class UserObject implements SkyObjects {
     right_ascension: String;
     declination: String;
     description: String;
+
+    constructor (name: String, right_ascension: String, declination: String, description: String) {
+        this.name = name;
+        this.right_ascension = right_ascension;
+        this.declination = declination;
+        this.description = description;
+    }
 }
 
 export class SolarSystemObject implements SkyObjects {

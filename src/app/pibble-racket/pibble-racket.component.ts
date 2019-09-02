@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { RacketService } from '../services/racket.service';
 import { PibbleCoordinate } from '../models/pibble-coordinate.model';
 import { SetupService } from '../services/setup.service';
+import { CatalogueService } from '../services/catalogue.service';
+import { UserObject } from '../models/pibble-object.model';
 
 @Component({
   selector: 'app-pibble-racket',
@@ -110,7 +112,7 @@ export class PibbleAddObject {
   constructor(
     public dialogRef: MatDialogRef<PibbleAddObject>,
     @Inject(MAT_DIALOG_DATA) public data: PibbleCoordinate,
-    private fb: FormBuilder) {
+    private fb: FormBuilder, private catalogueService: CatalogueService) {
 
     this.nameCtrl = fb.control('', [Validators.required]);
     this.raCtrl = fb.control('', [Validators.required]);
@@ -126,6 +128,13 @@ export class PibbleAddObject {
 
     this.decCtrl.setValue(data.dec);
     this.raCtrl.setValue(data.ra);
+  }
+
+  handleAddObject() {
+    let currentObject = new UserObject(this.nameCtrl.value, this.raCtrl.value, this.decCtrl.value, this.descCtrl.value);
+    this.catalogueService.addObjectInCatalogue(currentObject).subscribe(() => {
+      this.return();
+    });
   }
 
   return(): void {

@@ -4,7 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DAT
 import { CatalogueService } from '../services/catalogue.service';
 import { TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS } from '../app.constantes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SkyObjects, SolarSystemObject } from '../models/pibble-object.model';
+import { SkyObjects, SolarSystemObject, DeepSkyObject } from '../models/pibble-object.model';
 import { RacketService } from '../services/racket.service';
 
 /**
@@ -72,6 +72,7 @@ export class PibbleCatalogueComponent implements OnInit {
   filterCatalogueChange(event) {
     switch (event.value) {
       case TABLE_DEEPSKY_STARS:
+          this.filterForm.controls['visible'].enable();
         this.filterForm.controls['type'].disable();
         this.filterForm.controls['magnitude'].enable();
         this.typeCtrl.setValue('');
@@ -79,6 +80,7 @@ export class PibbleCatalogueComponent implements OnInit {
         this.getConstellations(event.value);
         break;
       case TABLE_DEEPSKY_OBJECTS:
+          this.filterForm.controls['visible'].enable();
         this.filterForm.controls['magnitude'].enable();
         this.typeCtrl.setValue('');
         this.constellationCtrl.setValue('');
@@ -92,9 +94,9 @@ export class PibbleCatalogueComponent implements OnInit {
         this.filterForm.controls['magnitude'].disable();
         this.filterForm.controls['type'].disable();
         this.filterForm.controls['constellation'].disable();
+        this.filterForm.controls['visible'].disable();
         break;
     }
-    this.filterForm.controls['visible'].enable();
   }
 
   getTypes() {
@@ -170,9 +172,13 @@ export class PibbleCatalogueComponent implements OnInit {
           });
       })
     } else {
-      this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
-        data => {
-          console.log(data);
+      this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.catalogueCtrl.value === TABLE_USER_OBJECTS ? '' : this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
+        (data: Array<DeepSkyObject>) => {
+          if (this.catalogueCtrl.value === TABLE_DEEPSKY_OBJECTS) {
+            data.forEach((object) => {
+              this.objects.push(<DeepSkyObject>object);
+            })
+          }
 
           this.isDataLoaded = true;
 
@@ -203,7 +209,7 @@ export class PibbleCatalogueComponentDetailsObject {
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
     @Inject(MAT_DIALOG_DATA) public data: SkyObjects, public telescopeService: RacketService) {
-    console.log(data);
+    console.log(JSON.parse(JSON.stringify(data)));
   }
 
   handleGoTo() {
