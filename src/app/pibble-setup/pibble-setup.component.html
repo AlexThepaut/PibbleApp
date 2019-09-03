@@ -20,25 +20,48 @@
         </button>
       </div>
       <div>
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>Second star</mat-label>
-          <mat-select [disabled]="!setupService.actualSetup.isCelestialPoleSet" (value)="setupService.actualSetup.secondStar">
-              <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
+          <mat-select [disabled]="!setupService.actualSetup.isCelestialPoleSet"
+            (value)="setupService.actualSetup.secondStar">
+            <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+        <form>
+          <mat-form-field>
+            <mat-label>Second star</mat-label>
+            <input type="text" matInput [formControl]="selectSecondStar" [matAutocomplete]="auto" [disabled]="!setupService.actualSetup.isCelestialPoleSet"
+              (value)="setupService.actualSetup.secondStar">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
       </div>
       <div>
-        <button mat-icon-button (click)="handleSecondPosition()" [disabled]="!setupService.actualSetup.isCelestialPoleSet">
+        <button mat-icon-button (click)="handleSecondPosition()"
+          [disabled]="!setupService.actualSetup.isCelestialPoleSet">
           <mat-icon>gps_fixed</mat-icon>
         </button>
       </div>
       <div>
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>Third star</mat-label>
-          <mat-select [disabled]="!setupService.actualSetup.isSecondStarSet" (value)="setupService.actualSetup.thirdStar.name">
+          <mat-select [disabled]="!setupService.actualSetup.isSecondStarSet"
+            (value)="setupService.actualSetup.thirdStar.name">
             <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.proper}}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
+        <form>
+          <mat-form-field>
+            <mat-label>Third star</mat-label>
+            <input type="text" matInput [formControl]="selectThirdStar" [matAutocomplete]="auto" [disabled]="!setupService.actualSetup.isSecondStarSet" (value)="setupService.actualSetup.thirdStar.name">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let star of starSelect" value="{{star.id}}">{{star.name}}</mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
       </div>
       <div>
         <button mat-icon-button (click)="handleThirdPosition()" [disabled]="!setupService.actualSetup.isSecondStarSet">
@@ -48,7 +71,8 @@
     </div>
     <div class="setup__command">
       <button mat-raised-button (click)="handleReset()">Reset</button>
-      <button mat-raised-button [disabled]="!setupService.actualSetup.isSecondStarSet" (click)="handleDone()">GO !</button>
+      <button mat-raised-button [disabled]="!setupService.actualSetup.isSecondStarSet" (click)="handleDone()">GO
+        !</button>
     </div>
   </div>
 </div>

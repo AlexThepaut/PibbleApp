@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PATH_RACKET } from '../app.constantes';
 import { SetupService } from '../services/setup.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { StarObject } from '../models/pibble-object.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-pibble-setup',
@@ -12,14 +16,33 @@ export class PibbleSetupComponent implements OnInit {
 
   starSelect = [];
 
+  selectSecondStar = new FormControl();
+  selectThirdStar = new FormControl();
+
+  filteredOptionsSecond: Observable<StarObject[]>;
+  filteredOptionsThird: Observable<StarObject[]>;
+
   constructor(private router: Router, private setupService: SetupService) { }
 
   ngOnInit() {
     this.setupService.getInitSetup().subscribe(data => {
-      console.log(data)
       this.setupService.actualSetup.isSetUp = false;
       this.starSelect = data;
     });
+
+    this.filteredOptionsSecond = this.selectSecondStar.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.starSelect.slice())
+      );
+
+    this.filteredOptionsThird = this.selectThirdStar.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.starSelect.slice())
+      );
   }
 
   handleReturn() {
@@ -62,5 +85,15 @@ export class PibbleSetupComponent implements OnInit {
       this.setupService.actualSetup.isSecondStarSet = false;
       this.setupService.actualSetup.isThirdStarSet = false;
     });
+  }
+
+  displayFn(user?: StarObject): String {
+    return user ? user.name : undefined;
+  }
+
+  private _filter(name: string): StarObject[] {
+    const filterValue = name.toLowerCase();
+
+    return this.starSelect.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 }

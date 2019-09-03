@@ -25,6 +25,7 @@ import {
   MatSelectModule,
   MatSlideToggleModule,
   MatChipsModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
@@ -84,6 +85,7 @@ const config: SocketIoConfig = { url: API_ADDRESS + API_SOCKET_PORT, options: {}
     MatButtonToggleModule,
     MatSlideToggleModule,
     MatChipsModule,
+    MatAutocompleteModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
     SocketIoModule.forRoot(config)
