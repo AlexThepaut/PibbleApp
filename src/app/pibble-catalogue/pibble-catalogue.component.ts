@@ -4,7 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DAT
 import { CatalogueService } from '../services/catalogue.service';
 import { TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS } from '../app.constantes';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SkyObjects, SolarSystemObject, DeepSkyObject } from '../models/pibble-object.model';
+import { SkyObjects, SolarSystemObject, DeepSkyObject, StarObject, UserObject } from '../models/pibble-object.model';
 import { RacketService } from '../services/racket.service';
 
 /**
@@ -72,7 +72,7 @@ export class PibbleCatalogueComponent implements OnInit {
   filterCatalogueChange(event) {
     switch (event.value) {
       case TABLE_DEEPSKY_STARS:
-          this.filterForm.controls['visible'].enable();
+        this.filterForm.controls['visible'].enable();
         this.filterForm.controls['type'].disable();
         this.filterForm.controls['magnitude'].enable();
         this.typeCtrl.setValue('');
@@ -80,7 +80,7 @@ export class PibbleCatalogueComponent implements OnInit {
         this.getConstellations(event.value);
         break;
       case TABLE_DEEPSKY_OBJECTS:
-          this.filterForm.controls['visible'].enable();
+        this.filterForm.controls['visible'].enable();
         this.filterForm.controls['magnitude'].enable();
         this.typeCtrl.setValue('');
         this.constellationCtrl.setValue('');
@@ -121,7 +121,7 @@ export class PibbleCatalogueComponent implements OnInit {
         this.openDialog(data);
       }
     )*/
-    
+
     this.openDialog(this.objects[this.objects.findIndex(p => p.name.toLowerCase() === event.toLowerCase())]);
   }
 
@@ -173,11 +173,25 @@ export class PibbleCatalogueComponent implements OnInit {
       })
     } else {
       this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.catalogueCtrl.value === TABLE_USER_OBJECTS ? '' : this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
-        (data: Array<DeepSkyObject>) => {
-          if (this.catalogueCtrl.value === TABLE_DEEPSKY_OBJECTS) {
-            data.forEach((object) => {
-              this.objects.push(<DeepSkyObject>object);
-            })
+        (data: Array<any>) => {
+          switch (this.catalogueCtrl.value) {
+            case TABLE_DEEPSKY_OBJECTS:
+              data.forEach((object) => {
+                this.objects.push(<DeepSkyObject>object);
+              })
+              break;
+            case TABLE_DEEPSKY_STARS:
+              data.forEach((object) => {
+                this.objects.push(<StarObject>object);
+              })
+              break;
+            case TABLE_USER_OBJECTS:
+              data.forEach((object) => {
+                this.objects.push(<UserObject>object);
+              })
+              break;
+            default:
+              break;
           }
 
           this.isDataLoaded = true;

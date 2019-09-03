@@ -35,11 +35,15 @@ export class PibbleJoystickComponent implements OnInit {
     this.staticNipple.on('start', () => {
       this.socket.emit('joystickdata', {'phase': 'start', 'angle': null, 'force': null});
     }).on('move', (evt, data: JoyStickData) => {
-      this.socket.emit('joystickdata', {'phase': 'move', 'angle': data.angle.degree, 'force': data.distance});
+      this.socket.emit('joystickdata', {'phase': 'move', 'angle': data.angle.degree, 'force': this.scale(data.distance, 0, 50, 0, 100)});
     }).on('end', () => {
       this.socket.emit('joystickdata', {'phase': 'stop', 'angle': null, 'force': null});
     });
 
+  }
+
+  scale (num: Number, in_min: number, in_max: number, out_min: number, out_max: number) {
+    return (<number>num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 }
 
