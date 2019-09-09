@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    overflow-x: hidden;
 }
 
 .detail__header {
@@ -16,5 +17,46 @@
 }
 
 .detail__footer {
-    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+}
+
+.detail__content {
+    margin: 10px auto;
+    width: 95%;
+    font-size: 12px;
+}
+
+.detail__infosup {
+    border-bottom: 1px rgba(92, 92, 92, 0.5) solid;
+    margin-top: 8px;
+    padding-bottom: 8px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.detail__sub-header {
+    display: grid;
+    grid-template-areas: "type const" "coord coord";
+    width: 95%;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.detail__type {
+    grid-area: type;
+}
+
+.detail__coostellation {
+    grid-area: const;
+}
+
+.detail__coordonate {
+    grid-area: coord;
 }

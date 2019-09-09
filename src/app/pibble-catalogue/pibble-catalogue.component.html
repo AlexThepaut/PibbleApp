@@ -26,14 +26,15 @@
               <mat-form-field class="filter__const">
                 <mat-label>Constelation</mat-label>
                 <mat-select formControlName="constellation">
+                  <mat-option [value]=""></mat-option>
                   <mat-option *ngFor="let const of filterConstellations" [value]="const">{{ const }}</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="filter__type">
                 <mat-label>Type</mat-label>
                 <mat-select formControlName="type">
-                  <mat-option *ngFor="let type of filterTypes" [value]="type">
-                    {{ type }}</mat-option>
+                  <mat-option [value]=""></mat-option>
+                  <mat-option *ngFor="let type of filterTypes" [value]="type">{{ type }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

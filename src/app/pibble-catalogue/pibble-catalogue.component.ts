@@ -116,12 +116,6 @@ export class PibbleCatalogueComponent implements OnInit {
   }
 
   handleObject(event) {
-    /*this.catalogueService.getCatalogueByName(this.catalogueCtrl.value, event).subscribe(
-      data => {
-        this.openDialog(data);
-      }
-    )*/
-
     this.openDialog(this.objects[this.objects.findIndex(p => p.name.toLowerCase() === event.toLowerCase())]);
   }
 
@@ -220,10 +214,13 @@ export class PibbleCatalogueComponent implements OnInit {
 })
 export class PibbleCatalogueComponentDetailsObject {
 
+  private infoSup: Array<Array<String>>;
+
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
     @Inject(MAT_DIALOG_DATA) public data: SkyObjects, public telescopeService: RacketService) {
-    console.log(JSON.parse(JSON.stringify(data)));
+    //console.log(JSON.stringify(data));
+    this.infoSup = this.constructArrayWithJSONString(data);
   }
 
   handleGoTo() {
@@ -237,4 +234,18 @@ export class PibbleCatalogueComponentDetailsObject {
     this.dialogRef.close();
   }
 
+  constructArrayWithJSONString(object: SkyObjects): Array<Array<String>> {
+    let temp: String = JSON.stringify(object);
+    let tabTemp: Array<String> = temp.replace('{', '').replace('}', '').split('null').join('').split('":').join('*&*').split(',"');
+
+    let result: Array<Array<String>> = [];
+
+    tabTemp.forEach(t => {
+      let tSplit = t.split('"').join('').split('*&*')
+      if (tSplit[0] != 'name' && tSplit[0] != 'constellation' && tSplit[0] != 'right_ascension' && tSplit[0] != 'declination' && tSplit[0] != 'type') {
+        result.push([tSplit[0], tSplit[1] === '' ? ' ' : tSplit[1]]);
+      }
+    })
+    return result;
+  }
 }
