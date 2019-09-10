@@ -4,8 +4,8 @@ import { PATH_RACKET } from '../app.constantes';
 import { SetupService } from '../services/setup.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { StarObject } from '../models/pibble-object.model';
-import { FormControl } from '@angular/forms';
+import { StarObject, SkyObjects } from '../models/pibble-object.model';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pibble-setup',
@@ -14,35 +14,30 @@ import { FormControl } from '@angular/forms';
 })
 export class PibbleSetupComponent implements OnInit {
 
-  starSelect = [];
+  secondStarSelect: SkyObjects[];
+  thirdStarSelect: SkyObjects[];
 
-  selectSecondStar = new FormControl();
-  selectThirdStar = new FormControl();
+  selectSecondStar: FormControl;
+  selectThirdStar: FormControl;
 
-  filteredOptionsSecond: Observable<StarObject[]>;
-  filteredOptionsThird: Observable<StarObject[]>;
+  setupForm: FormGroup;
 
-  constructor(private router: Router, private setupService: SetupService) { }
+  constructor(private router: Router, private setupService: SetupService, private fb: FormBuilder) {
+    this.selectSecondStar = fb.control('');
+    this.selectThirdStar = fb.control('');
+
+    this.setupForm = fb.group({
+      selectSecondStar: this.selectSecondStar,
+      selectThirdStar: this.selectThirdStar,
+    });
+  }
 
   ngOnInit() {
     this.setupService.getInitSetup().subscribe(data => {
       this.setupService.actualSetup.isSetUp = false;
-      this.starSelect = data;
+      this.secondStarSelect = data;
+      this.thirdStarSelect = data;
     });
-
-    this.filteredOptionsSecond = this.selectSecondStar.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.starSelect.slice())
-      );
-
-    this.filteredOptionsThird = this.selectThirdStar.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.starSelect.slice())
-      );
   }
 
   handleReturn() {
@@ -85,15 +80,5 @@ export class PibbleSetupComponent implements OnInit {
       this.setupService.actualSetup.isSecondStarSet = false;
       this.setupService.actualSetup.isThirdStarSet = false;
     });
-  }
-
-  displayFn(user?: StarObject): String {
-    return user ? user.name : undefined;
-  }
-
-  private _filter(name: string): StarObject[] {
-    const filterValue = name.toLowerCase();
-
-    return this.starSelect.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 }

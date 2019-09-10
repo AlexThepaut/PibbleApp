@@ -1,19 +1,21 @@
 <div class="detail__container">
-    <div class="detail__header">
-        <button mat-raised-button class="return-arrow" (click)="return()">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-        <h2 class="detail__title">{{ data.name | titlecase }}</h2>
-    </div>
-    <div class="detail__sub-header">
-        <div class="detail__type">
-            {{ data.type | titlecase }}
+    <div class="detail__header-container">
+        <div class="detail__header">
+            <button mat-raised-button class="return-arrow" (click)="return()">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h2 class="detail__title">{{ data.name | titlecase }}</h2>
         </div>
-        <div class="detail__coostellation">
-            {{ data.constellation | titlecase }}
-        </div>
-        <div class="detail__coordonate" *ngIf="data.right_ascension && data.declination">
-            RA : {{ data.right_ascension }} | Dec : {{ data.declination }}
+        <div class="detail__sub-header">
+            <div class="detail__type">
+                {{ data.type | titlecase }}
+            </div>
+            <div class="detail__coostellation">
+                {{ data.constellation | titlecase }}
+            </div>
+            <div class="detail__coordonate" *ngIf="data.right_ascension && data.declination">
+                RA : {{ data.right_ascension }} | Dec : {{ data.declination }}
+            </div>
         </div>
     </div>
     <div class="detail__content">

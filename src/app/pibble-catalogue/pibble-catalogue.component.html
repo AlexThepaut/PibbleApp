@@ -1,18 +1,18 @@
 <div class="container-catalogue">
   <div class="mat-elevation-z8">
     <div class="filter">
-      <mat-form-field class="filter__search">
-        <input matInput placeholder="Search">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-      <mat-accordion class="filter__menu">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Filter
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <form (ngSubmit)="handleSubmitFilter()" [formGroup]="filterForm" class="filter__form">
+      <form (ngSubmit)="handleSubmitFilter()" [formGroup]="filterForm" class="filter__form">
+        <mat-form-field class="filter__search">
+          <input matInput placeholder="Search" formControlName="search">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-accordion class="filter__menu">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Filter
+              </mat-panel-title>
+            </mat-expansion-panel-header>
             <mat-button-toggle-group class="catalogue__selector" (change)="filterCatalogueChange($event)"
               formControlName="catalogue">
               <mat-button-toggle *ngFor="let cata of filterCatalogue" class="catalogue__selector--button"
@@ -43,10 +43,10 @@
             </mat-slide-toggle>
             <button mat-raised-button class="filter__button" type="submit"
               [disabled]="filterForm.invalid">Apply</button>
-          </form>
-          <button mat-raised-button (click)="handleResetFilter()" class="filter__button">Reset</button>
-        </mat-expansion-panel>
-      </mat-accordion>
+            <button mat-raised-button (click)="handleResetFilter()" class="filter__button" type="button">Reset</button>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </form>
     </div>
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">

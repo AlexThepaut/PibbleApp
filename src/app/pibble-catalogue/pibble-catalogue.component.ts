@@ -31,6 +31,7 @@ export class PibbleCatalogueComponent implements OnInit {
 
   private isFilterType = false;
 
+  searchCtrl: FormControl;
   catalogueCtrl: FormControl;
   magnitudeCtrl: FormControl;
   constellationCtrl: FormControl;
@@ -45,6 +46,7 @@ export class PibbleCatalogueComponent implements OnInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.objects);
 
+    this.searchCtrl = fb.control('');
     this.catalogueCtrl = fb.control('', [Validators.required]);
     this.magnitudeCtrl = fb.control('');
     this.constellationCtrl = fb.control('');
@@ -52,6 +54,7 @@ export class PibbleCatalogueComponent implements OnInit {
     this.typeCtrl = fb.control('');
 
     this.filterForm = fb.group({
+      search: this.searchCtrl,
       catalogue: this.catalogueCtrl,
       magnitude: this.magnitudeCtrl,
       constellation: this.constellationCtrl,
@@ -166,7 +169,7 @@ export class PibbleCatalogueComponent implements OnInit {
           });
       })
     } else {
-      this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.catalogueCtrl.value === TABLE_USER_OBJECTS ? '' : this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value).subscribe(
+      this.catalogueService.getCatalogueAllWithFilter(this.catalogueCtrl.value, this.catalogueCtrl.value === TABLE_USER_OBJECTS ? '' : this.magnitudeCtrl.value, this.constellationCtrl.value, this.typeCtrl.value, this.visibleCtrl.value, this.searchCtrl.value).subscribe(
         (data: Array<any>) => {
           switch (this.catalogueCtrl.value) {
             case TABLE_DEEPSKY_OBJECTS:
