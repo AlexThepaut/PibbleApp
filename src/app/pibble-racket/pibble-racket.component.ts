@@ -132,6 +132,7 @@ export class PibbleAddObject {
 
   handleAddObject() {
     let currentObject = new UserObject(this.nameCtrl.value, this.raCtrl.value, this.decCtrl.value, this.descCtrl.value);
+    console.log(this.catalogueService.addObjectInCatalogue(currentObject))
     this.catalogueService.addObjectInCatalogue(currentObject).subscribe(() => {
       this.return();
     });

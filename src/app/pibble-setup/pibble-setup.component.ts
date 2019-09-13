@@ -38,6 +38,9 @@ export class PibbleSetupComponent implements OnInit {
       this.secondStarSelect = data;
       this.thirdStarSelect = data;
     });
+
+    this.setupService.actualSetup.isSecondStarSet ? this.selectSecondStar.enable() : this.selectSecondStar.disable();
+    this.setupService.actualSetup.isThirdStarSet ? this.selectThirdStar.enable() : this.selectThirdStar.disable();
   }
 
   handleReturn() {
@@ -48,6 +51,7 @@ export class PibbleSetupComponent implements OnInit {
     this.setupService.getPointSetup(1, null).subscribe(() => {
       this.setupService.actualSetup.precision = 20;
       this.setupService.actualSetup.isCelestialPoleSet = true;
+      this.selectSecondStar.enable()
     });
   }
 
@@ -55,6 +59,7 @@ export class PibbleSetupComponent implements OnInit {
     this.setupService.getPointSetup(2, this.setupService.actualSetup.secondStar.name).subscribe(() => {
       this.setupService.actualSetup.precision = 66;
       this.setupService.actualSetup.isSecondStarSet = true;
+      this.selectThirdStar.enable()
     });
   }
 

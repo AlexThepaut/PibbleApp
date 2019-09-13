@@ -48,7 +48,7 @@ export class CatalogueService {
   public addObjectInCatalogue(object: UserObject): Observable<any> {
     let request = API_ADDRESS + API_PORT + REQUEST_CATALOGUE;
     console.log(request);
-    return this.http.post(request, object, { headers: { 'Content-Type': 'application/json' } });
+    return this.http.post(request, JSON.parse(JSON.stringify(object)), { headers: { 'Content-Type': 'application/json' } });
   }
 
   public getEphemerides(): Observable<any> {

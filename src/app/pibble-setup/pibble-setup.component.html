@@ -10,7 +10,7 @@
       <h3>Precision</h3>
       <mat-progress-bar mode="determinate" [value]="setupService.actualSetup.precision"></mat-progress-bar>
     </div>
-    <form>
+    <form [formGroup]="setupForm">
       <div class="setup__point">
         <div>
           <h3>Celestial pole</h3>
@@ -23,7 +23,7 @@
         <div>
           <mat-form-field>
             <mat-label>Second star</mat-label>
-            <input type="text" matInput [formControl]="selectSecondStar" [matAutocomplete]="auto"
+            <input type="text" matInput formControlName="selectSecondStar" [matAutocomplete]="auto"
               (value)="setupService.actualSetup.secondStar">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let star of secondStarSelect" value="{{star.id}}">{{star.name}}
@@ -40,7 +40,7 @@
         <div>
           <mat-form-field>
             <mat-label>Third star</mat-label>
-            <input type="text" matInput [formControl]="selectThirdStar" [matAutocomplete]="auto"
+            <input type="text" matInput formControlName="selectThirdStar" [matAutocomplete]="auto"
               (value)="setupService.actualSetup.thirdStar.name">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let star of thirdStarSelect" value="{{star.id}}">{{star.name}}</mat-option>
