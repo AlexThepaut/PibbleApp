@@ -23,10 +23,10 @@
         <div>
           <mat-form-field>
             <mat-label>Second star</mat-label>
-            <input type="text" matInput formControlName="selectSecondStar" [matAutocomplete]="auto"
+            <input type="text" matInput formControlName="selectSecondStar" [matAutocomplete]="auto1"
               (value)="setupService.actualSetup.secondStar">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let star of secondStarSelect" value="{{star.id}}">{{star.name}}
+            <mat-autocomplete #auto1="matAutocomplete">
+              <mat-option *ngFor="let star of secondStarSelect; trackBy: trackItem" value="{{star.name}}">{{star.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -40,10 +40,10 @@
         <div>
           <mat-form-field>
             <mat-label>Third star</mat-label>
-            <input type="text" matInput formControlName="selectThirdStar" [matAutocomplete]="auto"
+            <input type="text" matInput formControlName="selectThirdStar" [matAutocomplete]="auto2"
               (value)="setupService.actualSetup.thirdStar.name">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let star of thirdStarSelect" value="{{star.id}}">{{star.name}}</mat-option>
+            <mat-autocomplete #auto2="matAutocomplete">
+              <mat-option *ngFor="let star of thirdStarSelect" value="{{star.name}}">{{star.name}}</mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </div>

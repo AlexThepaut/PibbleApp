@@ -245,7 +245,7 @@ export class PibbleCatalogueComponentDetailsObject {
 
     tabTemp.forEach(t => {
       let tSplit = t.split('"').join('').split('*&*')
-      if (tSplit[0] != 'name' && tSplit[0] != 'constellation' && tSplit[0] != 'right_ascension' && tSplit[0] != 'declination' && tSplit[0] != 'type') {
+      if (tSplit[0] != 'name' && tSplit[0] != 'constellation' && tSplit[0] != 'right_ascension' && tSplit[0] != 'declination' && tSplit[0] != 'type' && tSplit[0] != 'id') {
         result.push([tSplit[0], tSplit[1] === '' ? ' ' : tSplit[1]]);
       }
     })

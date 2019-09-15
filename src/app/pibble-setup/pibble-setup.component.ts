@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PATH_RACKET } from '../app.constantes';
+import { PATH_RACKET, TABLE_DEEPSKY_STARS } from '../app.constantes';
 import { SetupService } from '../services/setup.service';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { StarObject, SkyObjects } from '../models/pibble-object.model';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { CatalogueService } from '../services/catalogue.service';
 
 @Component({
   selector: 'app-pibble-setup',
@@ -14,15 +15,18 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class PibbleSetupComponent implements OnInit {
 
-  secondStarSelect: SkyObjects[];
-  thirdStarSelect: SkyObjects[];
+  secondStarSelect: StarObject[];
+  thirdStarSelect: StarObject[];
 
   selectSecondStar: FormControl;
   selectThirdStar: FormControl;
 
   setupForm: FormGroup;
 
-  constructor(private router: Router, private setupService: SetupService, private fb: FormBuilder) {
+  starAutocompleteSecond: Subscription;
+  starAutocompleteThird: Subscription;
+
+  constructor(private router: Router, private setupService: SetupService, private catalogueService: CatalogueService, private fb: FormBuilder) {
     this.selectSecondStar = fb.control('');
     this.selectThirdStar = fb.control('');
 
@@ -41,6 +45,24 @@ export class PibbleSetupComponent implements OnInit {
 
     this.setupService.actualSetup.isSecondStarSet ? this.selectSecondStar.enable() : this.selectSecondStar.disable();
     this.setupService.actualSetup.isThirdStarSet ? this.selectThirdStar.enable() : this.selectThirdStar.disable();
+
+    this.starAutocompleteSecond = this.selectSecondStar.valueChanges.subscribe(value => {
+      this.catalogueService.getCatalogueAllWithFilter(TABLE_DEEPSKY_STARS, null, null, null, null, value).subscribe((result: StarObject[]) => {
+        this.secondStarSelect = result;
+
+      });
+    }, error => console.log(error));
+
+    this.starAutocompleteThird = this.selectThirdStar.valueChanges.subscribe(value => {
+      this.catalogueService.getCatalogueAllWithFilter(TABLE_DEEPSKY_STARS, null, null, null, null, value).subscribe((result: StarObject[]) => {
+        this.thirdStarSelect = result;
+
+      });
+    }, error => console.log(error));
+  }
+
+  trackItem(index: number, item: StarObject) {
+    return item.id;
   }
 
   handleReturn() {
