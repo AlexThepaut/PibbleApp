@@ -17,7 +17,6 @@ export class GeolocalisationService {;
                 observer.complete();
             },
             (error: PositionError) => {
-                console.log('Geolocation service: ' + error.message);
                 observer.error(error);
             }
         );

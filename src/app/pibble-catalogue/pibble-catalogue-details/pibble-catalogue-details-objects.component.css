@@ -33,6 +33,7 @@
 }
 
 .detail__content {
+    flex: auto;
     margin: 10px auto;
     width: 95%;
     font-size: 12px;

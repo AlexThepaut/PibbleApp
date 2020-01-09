@@ -12,19 +12,16 @@ import { ConnectionService } from '../services/connection.service';
 export class PibbleConnectionComponent implements OnInit {
 
   isConnected = false;
-  isRequestBack = false;
+  isRequestBack = true;
   isError = false;
+
+  latitude: number;
+  longitude: number;
 
   constructor(private router: Router, private geolocation: GeolocalisationService, private connectionService: ConnectionService) {
   }
 
-  ngOnInit() {
-    this.connection();
-  }
-
-  handleSubmit() {
-    this.router.navigate([PATH_RACKET]);
-  }
+  ngOnInit() {}
 
   handleRetry() {
     this.isRequestBack = false;
@@ -33,25 +30,18 @@ export class PibbleConnectionComponent implements OnInit {
   }
 
   connection() {
-    this.geolocation.getCurrentPosition().subscribe(
-      data => {
-        let timezoneOffset = new Date().getTimezoneOffset() / 60;
-        this.connectionService.getConnection(data.coords.latitude, data.coords.longitude, data.timestamp, timezoneOffset).subscribe(() => {
-          this.isConnected = true;
-          this.isRequestBack = true;
-        },
-          error => {
-            this.isError = true;
-            this.isRequestBack = true;
-            console.log(error);
-          })
-      },
-      err => {
+    let timestamp = new Date().getTime();
+    let timezoneOffset = new Date().getTimezoneOffset() / 60;
+    console.log(this.latitude, this.longitude, timestamp, timezoneOffset);
+    this.connectionService.getConnection(this.latitude, this.longitude, timestamp, timezoneOffset).subscribe(() => {
+      this.isConnected = true;
+      this.isRequestBack = true;
+      this.router.navigate([PATH_RACKET]);
+    },
+      error => {
         this.isError = true;
         this.isRequestBack = true;
-        console.log(err);
-      }
-    );
+        console.error(error);
+      });
   }
-
 }

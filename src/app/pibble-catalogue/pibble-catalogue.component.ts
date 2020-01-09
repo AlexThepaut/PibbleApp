@@ -222,7 +222,6 @@ export class PibbleCatalogueComponentDetailsObject {
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
     @Inject(MAT_DIALOG_DATA) public data: SkyObjects, public telescopeService: RacketService) {
-    //console.log(JSON.stringify(data));
     this.infoSup = this.constructArrayWithJSONString(data);
   }
 

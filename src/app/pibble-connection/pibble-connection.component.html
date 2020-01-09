@@ -4,13 +4,20 @@
             <h3>Connection</h3>
             <h3>to</h3>
             <h2>Pibble Telescope</h2>
+
+            <mat-form-field>
+                <input matInput type="number" placeholder="Latitude" [(ngModel)]="latitude">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Longitude" [(ngModel)]="longitude">
+            </mat-form-field>
+
             <mat-spinner *ngIf="!isRequestBack"></mat-spinner>
             <!-- <span class="error error__message">Connection error</span> -->
             <mat-chip-list class="error">
                 <mat-chip color="warn" *ngIf="isError">Connection failed</mat-chip>
             </mat-chip-list>
-            <button mat-raised-button *ngIf="isError" (click)="handleRetry()" class="error" color="warn">Retry</button>
-            <button mat-raised-button  [disabled]="!isConnected" (click)="handleSubmit()">Start</button>
+            <button mat-raised-button (click)="connection()">Start</button>
         </mat-card>
     </div>
 </div>

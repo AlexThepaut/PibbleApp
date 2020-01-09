@@ -51,14 +51,14 @@ export class PibbleSetupComponent implements OnInit {
         this.secondStarSelect = result;
 
       });
-    }, error => console.log(error));
+    }, error => console.error(error));
 
     this.starAutocompleteThird = this.selectThirdStar.valueChanges.subscribe(value => {
       this.catalogueService.getCatalogueAllWithFilter(TABLE_DEEPSKY_STARS, null, null, null, null, value).subscribe((result: StarObject[]) => {
         this.thirdStarSelect = result;
 
       });
-    }, error => console.log(error));
+    }, error => console.error(error));
   }
 
   trackItem(index: number, item: StarObject) {

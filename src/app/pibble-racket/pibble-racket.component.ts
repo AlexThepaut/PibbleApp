@@ -35,8 +35,6 @@ export class PibbleRacketComponent implements OnInit {
   }
 
   handleMove(direction: String) {
-    console.log(direction);
-    console.log(this.speed);
     this.racketService.telescopeMove(direction, this.speed).subscribe(() => { });
   }
 
@@ -49,12 +47,10 @@ export class PibbleRacketComponent implements OnInit {
   }
 
   handleTrack() {
-    console.log('move')
     this.racketService.telescopeTrack().subscribe(() => { });
   }
 
   handleStop() {
-    console.log('stop')
     this.racketService.telescopeStop().subscribe(() => { });
   }
 
@@ -75,7 +71,6 @@ export class PibbleRacketComponent implements OnInit {
 
   updatePosition() {
     this.racketService.telescopePosiion().subscribe(data => {
-      console.log(data);
       this.coordonite.ra = data.ra;
       this.coordonite.dec = data.dec;
       this.coordonite.alt = data.alt;
@@ -132,7 +127,6 @@ export class PibbleAddObject {
 
   handleAddObject() {
     let currentObject = new UserObject(this.nameCtrl.value, this.raCtrl.value, this.decCtrl.value, this.descCtrl.value);
-    console.log(this.catalogueService.addObjectInCatalogue(currentObject))
     this.catalogueService.addObjectInCatalogue(currentObject).subscribe(() => {
       this.return();
     });
