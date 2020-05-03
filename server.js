@@ -1,19 +1,22 @@
-const express = require('express');
-const https = require('https');
-const path = require('path');
-const fs = require('fs');
+const express = require("express");
+const compression = require("compression");
 
-var key = fs.readFileSync(__dirname + '/certificates/selfsigned.key');
-var cert = fs.readFileSync(__dirname + '/certificates/selfsigned.crt');
-
-var credentials = { key: key, cert: cert };
+const _port = 4100;
+const _app_folder = 'dist/pibbleApp';
 
 const app = express();
+app.use(compression());
 
-app.use(express.static(__dirname + '/dist/pibbleApp'));
 
-app.get('/*', (req, rep) => res.sendFile(path.join(__dirname)));
+// ---- SERVE STATIC FILES ---- //
+app.get('*.*', express.static(_app_folder, {maxAge: '1y'}));
 
-const server = https.createServer(credentials, app);
+// ---- SERVE APLICATION PATHS ---- //
+app.all('*', function (req, res) {
+    res.status(200).sendFile(`/`, {root: _app_folder});
+});
 
-server.listen(port, () => console.log('Running ...'));
+// ---- START UP THE NODE SERVER  ----
+app.listen(_port, function () {
+    console.log("Node Express server for " + app.name + " listening on http://localhost:" + _port);
+});
