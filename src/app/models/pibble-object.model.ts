@@ -3,6 +3,8 @@ export interface SkyObjects {
     type?: String;
     constellation?: String;
     magnitude?: any;
+    right_ascension?: String;
+    declination?: String;
 }
 
 export class DeepSkyObject implements SkyObjects {
@@ -11,8 +13,6 @@ export class DeepSkyObject implements SkyObjects {
     other: String;
     type: String;
     constellation: String;
-    right_ascension: String;
-    declination: String;
     magnitude: String;
     surface_brightness: String;
     u2k: Number;
@@ -36,8 +36,6 @@ export class StarObject implements SkyObjects {
     hr: Number;
     gl: String;
     bf: String;
-    right_ascension: Number;
-    declination: Number;
     distance: Number;
     pmra: Number;
     pmdec: Number;

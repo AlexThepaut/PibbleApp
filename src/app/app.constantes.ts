@@ -1,5 +1,7 @@
 /* App info */
 
+import { environment } from 'src/environments/environment';
+
 export const VERSION = '0.0.1';
 
 /* Path constant */
@@ -10,9 +12,9 @@ export const PATH_SETUP = 'setup';
 
 /* Address constant */
 
-export const API_ADDRESS = 'http://localhost:';
-export const API_PORT = 5000;
-export const API_SOCKET_PORT = 5000;
+export const API_ADDRESS = environment.urlBack;
+export const API_PORT = environment.portBack;
+export const API_SOCKET_PORT = environment.portBack;
 
 /* Catalogue request constant */
 

@@ -26,7 +26,7 @@ export class PibbleSetupComponent implements OnInit {
   starAutocompleteSecond: Subscription;
   starAutocompleteThird: Subscription;
 
-  constructor(private router: Router, private setupService: SetupService, private catalogueService: CatalogueService, private fb: FormBuilder) {
+  constructor(private router: Router, public setupService: SetupService, private catalogueService: CatalogueService, private fb: FormBuilder) {
     this.selectSecondStar = fb.control('');
     this.selectThirdStar = fb.control('');
 

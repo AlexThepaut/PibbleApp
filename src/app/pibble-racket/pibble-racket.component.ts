@@ -15,17 +15,16 @@ import { UserObject } from '../models/pibble-object.model';
   styleUrls: ['./pibble-racket.component.css']
 })
 export class PibbleRacketComponent implements OnInit {
+  coordonite = new PibbleCoordinate();
 
-  private coordonite = new PibbleCoordinate();
+  speed: number;
+  
+  toggleIconRealTime = 'play_arrow';
+  isPositionUpdate = true;
 
   private realTimePosition;
-
-  private speed: number;
-
-  private toggleIconRealTime = 'play_arrow';
-  private isPositionUpdate = true;
   
-  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService, private setupService: SetupService) {
+  constructor(private router: Router, public dialog: MatDialog, private racketService: RacketService, public setupService: SetupService) {
     
   }
 

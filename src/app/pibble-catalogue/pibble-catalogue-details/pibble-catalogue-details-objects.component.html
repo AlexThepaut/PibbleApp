@@ -13,8 +13,8 @@
             <div class="detail__coostellation">
                 {{ data.constellation | titlecase }}
             </div>
-            <div class="detail__coordonate" *ngIf="data.right_ascension && data.declination">
-                RA : {{ data.right_ascension }} | Dec : {{ data.declination }}
+            <div class="detail__coordonate">
+                RA : {{ data?.right_ascension }} | Dec : {{ data?.declination }}
             </div>
         </div>
     </div>

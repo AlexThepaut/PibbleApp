@@ -19,13 +19,13 @@ export class PibbleCatalogueComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'const', 'mag'];
   dataSource: MatTableDataSource<SkyObjects>;
 
-  private isDataLoaded = true;
+  filterCatalogue = [TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS];
+  filterConstellations = [];
+  filterTypes = [];
+
+  isDataLoaded = true;
 
   private objects: Array<SkyObjects> = [];
-
-  private filterConstellations = [];
-  private filterTypes = [];
-  private filterCatalogue = [TABLE_DEEPSKY_OBJECTS, TABLE_DEEPSKY_STARS, TABLE_SOLAR_OBJECTS, TABLE_USER_OBJECTS];
 
   private typesObjects = [];
 
@@ -217,7 +217,7 @@ export class PibbleCatalogueComponent implements OnInit {
 })
 export class PibbleCatalogueComponentDetailsObject {
 
-  private infoSup: Array<Array<String>>;
+  infoSup: Array<Array<String>>;
 
   constructor(
     public dialogRef: MatDialogRef<PibbleCatalogueComponentDetailsObject>,
