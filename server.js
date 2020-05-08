@@ -2,7 +2,7 @@ const express = require("express");
 const compression = require("compression");
 
 const _port = 4100;
-const _app_folder = 'dist/pibbleApp';
+const _app_folder = './dist/pibbleApp';
 
 const app = express();
 app.use(compression());
